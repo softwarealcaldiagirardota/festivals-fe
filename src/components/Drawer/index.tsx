@@ -10,14 +10,18 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import { Backdrop } from "@mui/material";
 import { useHeader } from "../../context/header-context";
 import Title from "../Title";
 import { palette } from "../../theme";
 import { useNavigate } from "react-router-dom";
+import {
+  AddBusiness,
+  Gavel,
+  HowToVote,
+  Poll,
+  Receipt,
+} from "@mui/icons-material";
 
 const drawerWidth = 240;
 
@@ -68,17 +72,35 @@ export default function PersistentDrawerLeft() {
         <Divider />
         <List>
           {[
-            { label: "Dashboard", url: "/dashboard" },
-            { label: "Soy participante", url: "/company-reports" },
-            { label: "Soy Juez", url: "/judge-votes" },
-            { label: "Soy proveedor", url: "/provider-reports" },
-            { label: "Calificar", url: "/client-votes" },
+            {
+              label: "Dashboard",
+              url: "/dashboard",
+              icon: <Poll sx={{ color: palette.primary.title }} />,
+            },
+            {
+              label: "Soy participante",
+              url: "/company-reports",
+              icon: <AddBusiness sx={{ color: palette.primary.title }} />,
+            },
+            {
+              label: "Soy Juez",
+              url: "/judge-votes",
+              icon: <Gavel sx={{ color: palette.primary.title }} />,
+            },
+            {
+              label: "Soy proveedor",
+              url: "/provider-reports",
+              icon: <Receipt sx={{ color: palette.primary.title }} />,
+            },
+            {
+              label: "Calificar",
+              url: "/client-votes",
+              icon: <HowToVote sx={{ color: palette.primary.title }} />,
+            },
           ].map((item, index) => (
             <ListItem key={index} onClick={handleNavigate.bind(null, item.url)}>
               <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
+                <ListItemIcon>{item.icon}</ListItemIcon>
                 <Title isMenu text={item.label} />
               </ListItemButton>
             </ListItem>

@@ -3,13 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { ThemeProvider } from "@mui/material";
-import TextNumber from "./components/TextNumber/index.tsx";
-import Button from "./components/Button/index.tsx";
 import { theme } from "./theme.ts";
-import Title from "./components/Title/index.tsx";
-import Description from "./components/Description/index.tsx";
-import Number from "./components/Number/index.tsx";
-import StatusLabel from "./components/StatusLabel/index.tsx";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import Header from "./components/Header/index.tsx";
@@ -35,16 +29,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Header />
             <App />
           </BrowserRouter>
-          {/* <TextNumber value="€ / kg" />
-        <Number value="1.41" />
-        <Button text="Botón fondo entero" />
-        <Button variant="outlined" text="Botón sin fondo" />
-        <Title text="Título grande" />
-        <Title text="Título mediano" type="medium" />
-        <Title text="Título pequeño" type="small" />
-        <Description text="Descripción grande" />
-        <Description isSmall text="Descripción pequeño" />
-        <StatusLabel value="Estado" /> */}
         </Auth0Provider>
       </HeaderProvider>
     </React.StrictMode>
