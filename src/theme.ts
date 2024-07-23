@@ -19,6 +19,7 @@ interface PropColor {
   dark: string;
   title?: string;
   description?: string;
+  statusLabel?: string;
   0?: string;
   1?: string;
   2?: string;
@@ -57,6 +58,7 @@ export const palette: PropsPalette = {
     main: "#0BCE83",
     dark: "#410F92",
     description: "#9586A8",
+    statusLabel: "#7203FF",
     "1": "#513CE1",
     "2": "#29D99A",
     "3": "#FDB600",
