@@ -5,12 +5,12 @@ const JudgeVotes = () => {
   const { setTitle } = useHeader();
 
   useEffect(() => {
-    setTitle("Soy Juez");
+    setTitle("Soy Jurado");
   }, []);
 
   return (
     <>
-      <h1>Soy Juez</h1>
+      <h1>Soy Jurado</h1>
     </>
   );
 };

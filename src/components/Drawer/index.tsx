@@ -15,13 +15,7 @@ import { useHeader } from "../../context/header-context";
 import Title from "../Title";
 import { palette } from "../../theme";
 import { useNavigate } from "react-router-dom";
-import {
-  AddBusiness,
-  Gavel,
-  HowToVote,
-  Poll,
-  Receipt,
-} from "@mui/icons-material";
+import { menuItems } from "../../utils/utils";
 
 const drawerWidth = 240;
 
@@ -71,33 +65,7 @@ export default function PersistentDrawerLeft() {
         </DrawerHeader>
         <Divider />
         <List>
-          {[
-            {
-              label: "Dashboard",
-              url: "/dashboard",
-              icon: <Poll sx={{ color: palette.primary.title }} />,
-            },
-            {
-              label: "Soy participante",
-              url: "/company-reports",
-              icon: <AddBusiness sx={{ color: palette.primary.title }} />,
-            },
-            {
-              label: "Soy Juez",
-              url: "/judge-votes",
-              icon: <Gavel sx={{ color: palette.primary.title }} />,
-            },
-            {
-              label: "Soy proveedor",
-              url: "/provider-reports",
-              icon: <Receipt sx={{ color: palette.primary.title }} />,
-            },
-            {
-              label: "Calificar",
-              url: "/client-votes",
-              icon: <HowToVote sx={{ color: palette.primary.title }} />,
-            },
-          ].map((item, index) => (
+          {menuItems.map((item, index) => (
             <ListItem key={index} onClick={handleNavigate.bind(null, item.url)}>
               <ListItemButton>
                 <ListItemIcon>{item.icon}</ListItemIcon>

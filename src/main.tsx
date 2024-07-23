@@ -9,6 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 import Header from "./components/Header/index.tsx";
 import { HeaderProvider } from "./context/header-context.tsx";
 import PersistentDrawerLeft from "./components/Drawer/index.tsx";
+import Footer from "./components/FooterMenu/index.tsx";
 
 const domain = "dev-t7qrzenx1neaggbp.us.auth0.com"; //import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = "NxzOyJPPDsH8EklQOCJot9IcGpD7Gnso"; //import.meta.env.VITE_AUTH0_CLIENT_ID;
@@ -28,6 +29,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <PersistentDrawerLeft />
             <Header />
             <App />
+            <Footer />
           </BrowserRouter>
         </Auth0Provider>
       </HeaderProvider>

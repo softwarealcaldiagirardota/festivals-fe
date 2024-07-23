@@ -14,11 +14,11 @@ const ClientVotes = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setShowSplash(false);
-    }, 5000);
+    }, 4000);
 
     const timeout = setTimeout(() => {
       clearInterval(interval);
-    }, 5000);
+    }, 4000);
 
     return () => {
       clearInterval(interval);

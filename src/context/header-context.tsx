@@ -1,3 +1,4 @@
+import { useMediaQuery } from "@mui/material";
 import {
   createContext,
   useContext,
@@ -5,12 +6,14 @@ import {
   ReactNode,
   useEffect,
 } from "react";
+import { theme } from "../theme";
 
 interface HeaderContextType {
   title: string;
   setTitle: (title: string) => void;
   openDrawerMenu: boolean;
   setOpenDrawerMenu: (openDrawerMenu: boolean) => void;
+  isMobile?: boolean;
 }
 
 const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
@@ -18,6 +21,7 @@ const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
 export const HeaderProvider = ({ children }: { children: ReactNode }) => {
   const [title, setTitle] = useState<string>("");
   const [openDrawerMenu, setOpenDrawerMenu] = useState<boolean>(false);
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     setOpenDrawerMenu(false);
@@ -30,6 +34,7 @@ export const HeaderProvider = ({ children }: { children: ReactNode }) => {
         setTitle,
         openDrawerMenu,
         setOpenDrawerMenu,
+        isMobile,
       }}
     >
       {children}
