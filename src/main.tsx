@@ -29,7 +29,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Button text="Botón fondo entero" />
         <Button variant="outlined" text="Botón sin fondo" />
         <Title text="Título grande" />
-        <Title text="Título pequeño" isSubtitle />
+        <Title text="Título mediano" type="medium" />
+        <Title text="Título pequeño" type="small" />
         <Description text="Descripción grande" />
         <Description isSmall text="Descripción pequeño" />
         <StatusLabel value="Estado" />
