@@ -21,6 +21,7 @@ interface PropColor {
   description?: string;
   statusLabel?: string;
   background?: string;
+  backgroundBlueFestivalChicharron?: string;
   0?: string;
   1?: string;
   2?: string;
@@ -56,11 +57,12 @@ export const palette: PropsPalette = {
     ...oldTheme.palette.primary,
     title: "#2D0C57",
     light: "#EDDFFF",
-    main: "#0BCE83",
+    main: "#0487D9",
     dark: "#410F92",
     description: "#9586A8",
     statusLabel: "#7203FF",
     background: "#F6F5F5",
+    backgroundBlueFestivalChicharron: "#0487D9",
     "1": "#513CE1",
     "2": "#29D99A",
     "3": "#FDB600",
