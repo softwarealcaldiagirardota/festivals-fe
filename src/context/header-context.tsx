@@ -9,7 +9,7 @@ import {
 interface HeaderContextType {
   title: string;
   setTitle: (title: string) => void;
-  openDrawerMenu?: boolean;
+  openDrawerMenu: boolean;
   setOpenDrawerMenu: (openDrawerMenu: boolean) => void;
 }
 

@@ -7,30 +7,10 @@ import Dashboard from "./pages/dashboard";
 import JudgeVotes from "./pages/judge-votes";
 import ProviderReports from "./pages/provider-reports";
 import Container from "./components/Container";
-import Splash from "./components/Splash";
-import { useEffect, useState } from "react";
 
 const App = () => {
-  const [showSplash, setShowSplash] = useState(true);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setShowSplash(false);
-    }, 5000);
-
-    const timeout = setTimeout(() => {
-      clearInterval(interval);
-    }, 5000);
-
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
-  }, []);
-
   return (
     <>
-      {showSplash && <Splash />}
       <Container>
         <Routes>
           <Route path="/" element={<Login />} />
