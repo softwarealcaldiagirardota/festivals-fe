@@ -1,54 +1,54 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import { useAuth0 } from "@auth0/auth0-react";
+import { Route, Routes } from "react-router-dom";
+import PrivateRoute from "./private-routes";
+import Login from "./pages/login";
+import ClientVotes from "./pages/client-votes";
+import CompanyReports from "./pages/company-reports";
+import Dashboard from "./pages/dashboard";
+import JudgeVotes from "./pages/judge-votes";
+import ProviderReports from "./pages/provider-reports";
+import Container from "./components/Container";
 
-function App() {
- 
-
-  const {
-    isLoading,
-    isAuthenticated,
-    loginWithRedirect,
-    logout,
-    user,
-    getAccessTokenSilently,
-  } = useAuth0();
-  
-  useEffect(() => {
-    const getToken = async () => {
-      try {
-        const accessToken = await getAccessTokenSilently();
-        setToken(accessToken);
-      } catch (error) {
-        console.error("Error getting access token:", error);
-      }
-    };
-
-    if (isAuthenticated) {
-      getToken();
-    }
-  }, [isAuthenticated, getAccessTokenSilently]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
+const App = () => {
   return (
-    <>
-      {isAuthenticated ? (
-        <div>
-          <h2>Welcome {user.name}</h2>
-
-          <img src={user.picture} />
-          <button onClick={() => logout({ returnTo: window.location.origin })}>
-            Logout
-          </button>
-        </div>
-      ) : (
-        <button onClick={() => loginWithRedirect()}>Login</button>
-      )}
-    </>
+    <Container>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/client-votes" element={<ClientVotes />} />
+        <Route
+          path="/company-reports"
+          element={
+            <PrivateRoute>
+              <CompanyReports />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/judge-votes"
+          element={
+            <PrivateRoute>
+              <JudgeVotes />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/provider-reports"
+          element={
+            <PrivateRoute>
+              <ProviderReports />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </Container>
   );
-}
+};
 
 export default App;

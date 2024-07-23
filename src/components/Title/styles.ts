@@ -10,4 +10,12 @@ const StyledTitle = styled(Typography)(({ size }: { size: string }) => ({
   color: palette.primary.title,
 }));
 
-export { StyledTitle };
+const StyledTitleMenu = styled(Typography)(() => ({
+  fontWeight: "400",
+  fontSize: "16px",
+  lineHeight: "41px",
+  letterSpacing: "0.4px",
+  color: palette.primary.title,
+}));
+
+export { StyledTitle, StyledTitleMenu };

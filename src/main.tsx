@@ -10,6 +10,11 @@ import Title from "./components/Title/index.tsx";
 import Description from "./components/Description/index.tsx";
 import Number from "./components/Number/index.tsx";
 import StatusLabel from "./components/StatusLabel/index.tsx";
+import App from "./App.tsx";
+import { BrowserRouter } from "react-router-dom";
+import Header from "./components/Header/index.tsx";
+import { HeaderProvider } from "./context/header-context.tsx";
+import PersistentDrawerLeft from "./components/Drawer/index.tsx";
 
 const domain = "dev-t7qrzenx1neaggbp.us.auth0.com"; //import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = "NxzOyJPPDsH8EklQOCJot9IcGpD7Gnso"; //import.meta.env.VITE_AUTH0_CLIENT_ID;
@@ -17,14 +22,20 @@ const clientId = "NxzOyJPPDsH8EklQOCJot9IcGpD7Gnso"; //import.meta.env.VITE_AUTH
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <ThemeProvider theme={theme}>
     <React.StrictMode>
-      <Auth0Provider
-        domain={domain}
-        clientId={clientId}
-        authorizationParams={{
-          redirect_uri: window.location.origin,
-        }}
-      >
-        <TextNumber value="€ / kg" />
+      <HeaderProvider>
+        <Auth0Provider
+          domain={domain}
+          clientId={clientId}
+          authorizationParams={{
+            redirect_uri: window.location.origin,
+          }}
+        >
+          <BrowserRouter>
+            <PersistentDrawerLeft />
+            <Header />
+            <App />
+          </BrowserRouter>
+          {/* <TextNumber value="€ / kg" />
         <Number value="1.41" />
         <Button text="Botón fondo entero" />
         <Button variant="outlined" text="Botón sin fondo" />
@@ -33,9 +44,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Title text="Título pequeño" type="small" />
         <Description text="Descripción grande" />
         <Description isSmall text="Descripción pequeño" />
-        <StatusLabel value="Estado" />
-      </Auth0Provider>
-      ,
+        <StatusLabel value="Estado" /> */}
+        </Auth0Provider>
+      </HeaderProvider>
     </React.StrictMode>
   </ThemeProvider>
 );

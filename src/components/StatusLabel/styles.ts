@@ -9,6 +9,7 @@ const StyledStatusLabel = styled(Typography)(() => ({
   letterSpacing: "-0.009",
   color: palette.primary.statusLabel,
   textTransform: "uppercase" as const,
+  cursor: "pointer",
 }));
 
 export { StyledStatusLabel };

@@ -20,6 +20,7 @@ interface PropColor {
   title?: string;
   description?: string;
   statusLabel?: string;
+  background?: string;
   0?: string;
   1?: string;
   2?: string;
@@ -59,6 +60,7 @@ export const palette: PropsPalette = {
     dark: "#410F92",
     description: "#9586A8",
     statusLabel: "#7203FF",
+    background: "#F6F5F5",
     "1": "#513CE1",
     "2": "#29D99A",
     "3": "#FDB600",
@@ -103,7 +105,10 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#0BCE83",
+      main: palette.primary.main,
+    },
+    background: {
+      default: palette.primary.background,
     },
   },
 });
