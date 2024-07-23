@@ -3,7 +3,7 @@ import "./App.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
-  const [token, setToken] = useState<string | null>(null);
+ 
 
   const {
     isLoading,
@@ -13,7 +13,7 @@ function App() {
     user,
     getAccessTokenSilently,
   } = useAuth0();
-  console.log("***navigator", navigator);
+  
   useEffect(() => {
     const getToken = async () => {
       try {

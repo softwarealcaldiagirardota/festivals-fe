@@ -1,19 +1,20 @@
-import { Button } from '@mui/material';
+import { ButtonStyled, StyledButton } from "./styles";
 
-const ButtonMaterial = () => {
+const contained = "contained";
+interface IButton {
+  variant?: "contained" | "outlined";
+  text: string;
+}
+const Button = ({ variant = "contained", text }: IButton) => {
   return (
-    <Button
-      variant="contained"
+    <ButtonStyled
+      isOutlined={variant === contained}
+      variant={variant}
       color="primary"
-      sx={{
-        fontFamily: "'San Francisco', Helvetica, Arial, sans-serif", // Set font stack
-        color: '#fff', // Set text color (optional)
-        border: '1px solid #000000', // Set border color (optional)
-      }}
     >
-      <span style={{ textTransform: 'none' }}>ORDER NOW </span>
-    </Button>
+      <StyledButton>{text}</StyledButton>
+    </ButtonStyled>
   );
 };
 
-export default ButtonMaterial;
+export default Button;
