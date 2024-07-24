@@ -4,11 +4,11 @@ import { palette } from "../../theme";
 const StyledHeader = styled.header`
   color: ${() => palette.primary.title};
   position: fixed;
-  padding: 0 40px;
+  padding: 0 20px;
   top: 0;
   left: 0;
   right: 0;
-  height: 80px;
+  height: 70px;
   background-color: ${() => palette.neutral.W};
   display: flex;
   flex-direction: row;

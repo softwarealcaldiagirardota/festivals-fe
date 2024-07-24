@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 
 const StyledHeader = styled.div`
-  margin: 100px 20px 0 20px;
-  width: 100%;
+  margin: 90px 0 0 0;
 `;
 
 export { StyledHeader };
