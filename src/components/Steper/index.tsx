@@ -6,10 +6,11 @@ import { CustomStepper } from "./styles";
 
 interface ISteper {
   steps: string[];
+  currentStep: number;
 }
-const Steper = ({ steps }: ISteper) => {
+const Steper = ({ steps, currentStep = 0 }: ISteper) => {
   return (
-    <CustomStepper alternativeLabel>
+    <CustomStepper alternativeLabel activeStep={currentStep}>
       {steps.map((label) => (
         <Step key={label}>
           <StepLabel>{label}</StepLabel>

@@ -1,6 +1,6 @@
 import { StyledTitle, StyledTitleMenu } from "./styles";
 
-type Types = "big" | "small" | "medium";
+type Types = "big" | "small" | "medium" | "xs";
 interface ITitle {
   text: string;
   type?: Types;
@@ -13,6 +13,8 @@ const getSize = (type: Types) => {
       return "34px";
     case "small":
       return "22px";
+    case "xs":
+      return "18px";
     case "medium":
       return "30px";
     default:

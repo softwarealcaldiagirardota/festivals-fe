@@ -14,7 +14,7 @@ const ButtonStyled = styled(Button)(
 
 const StyledButton = styled(Typography)({
   fontWeight: "600",
-  fontSize: "15px",
+  fontSize: "18px",
   lineHeight: "18px",
   letterSpacing: "-0.1px",
   textAlign: "center",

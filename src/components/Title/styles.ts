@@ -8,6 +8,7 @@ const StyledTitle = styled(Typography)(({ size }: { size: string }) => ({
   lineHeight: "41px",
   letterSpacing: "0.4px",
   color: palette.primary.title,
+  textAlign: "center" as const,
 }));
 
 const StyledTitleMenu = styled(Typography)(() => ({
