@@ -10,6 +10,8 @@ import {
 import Steper from "../../components/Steper";
 import { Box, Rating } from "@mui/material";
 import Button from "../../components/Button";
+import ConfirmationSplash from "../../components/ConfirmationSplash";
+import { messages } from "../../utils/utils";
 
 const steps = ["Sabor", "Presentación", "Satisfecho"];
 const questions = [
@@ -19,7 +21,7 @@ const questions = [
 ];
 
 const ClientVotes = () => {
-  const { setTitle, isMobile } = useHeader();
+  const { setTitle, isMobile, showSnackBar, online } = useHeader();
   const [currentStep, setCurrentStep] = useState(0);
   const [nextStep, setNextStep] = useState(false);
   const [ratings, setRatings] = useState<{ [key: number]: number | null }>({
@@ -65,13 +67,28 @@ const ClientVotes = () => {
     };
   }, []);
 
+  const [saved, setSaved] = useState(false);
+  const handleSubmit = () => {
+    if (!online) {
+      showSnackBar({
+        message: messages.internetError,
+      });
+      return;
+    }
+    showSnackBar({
+      message: messages.genericError,
+    });
+    setSaved(true);
+  };
+
   return (
     <>
+      {saved && <ConfirmationSplash />}
       {showSplash && <Splash />}
       {!showSplash && (
         <StyledClientVotesView isMobile={isMobile}>
           <Title text="Postre de chicharrón" type="medium" />
-          <Box sx={{ marginTop: "80px", width: "100%" }}>
+          <Box sx={{ marginTop: "40px", width: "100%" }}>
             <Steper steps={steps} currentStep={currentStep} />
           </Box>
           {questions.map((question) => {
@@ -94,11 +111,7 @@ const ClientVotes = () => {
           <Button
             text={currentStep > 1 ? "Guardar calificación" : "Siguiente"}
             canContinue={nextStep}
-            onClick={
-              currentStep === 2
-                ? () => alert(JSON.stringify(ratings))
-                : handleCurrentStep
-            }
+            onClick={currentStep === 2 ? handleSubmit : handleCurrentStep}
           />
           {currentStep > 0 && (
             <Button

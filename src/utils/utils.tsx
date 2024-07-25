@@ -36,3 +36,9 @@ export const menuItems = [
     icon: <HowToVote sx={{ color: colorIcon, fontSize: fontSize }} />,
   },
 ];
+
+export const messages = {
+  internetError:
+    "Conexión a Internet no disponible. Por favor, inténtalo de nuevo más tarde.",
+  genericError: "Se produjo un error. Por favor, inténtalo de nuevo.",
+};

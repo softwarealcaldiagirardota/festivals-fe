@@ -5,6 +5,7 @@ interface ITitle {
   text: string;
   type?: Types;
   isMenu?: boolean;
+  color?: "white" | "default";
 }
 
 const getSize = (type: Types) => {
@@ -21,11 +22,15 @@ const getSize = (type: Types) => {
       return "34px";
   }
 };
-const Title = ({ text, type = "big", isMenu }: ITitle) => {
+const Title = ({ text, type = "big", isMenu, color }: ITitle) => {
   if (isMenu) {
     return <StyledTitleMenu>{text}</StyledTitleMenu>;
   }
-  return <StyledTitle size={getSize(type)}>{text}</StyledTitle>;
+  return (
+    <StyledTitle color={color} size={getSize(type)}>
+      {text}
+    </StyledTitle>
+  );
 };
 
 export default Title;

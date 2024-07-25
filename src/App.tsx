@@ -7,8 +7,11 @@ import Dashboard from "./pages/dashboard";
 import JudgeVotes from "./pages/judge-votes";
 import ProviderReports from "./pages/provider-reports";
 import Container from "./components/Container";
+import { Alert, Snackbar } from "@mui/material";
+import { useHeader } from "./context/header-context";
 
 const App = () => {
+  const { snackBarState, handleSnackBarClose } = useHeader();
   return (
     <>
       <Container>
@@ -49,6 +52,24 @@ const App = () => {
           />
         </Routes>
       </Container>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={snackBarState?.open}
+        autoHideDuration={5000}
+        onClose={handleSnackBarClose}
+      >
+        <Alert
+          onClose={handleSnackBarClose}
+          severity="error"
+          variant="filled"
+          // sx={{
+          //   bgcolor: "red",
+          //   color: "white",
+          // }}
+        >
+          {snackBarState?.message}
+        </Alert>
+      </Snackbar>
     </>
   );
 };

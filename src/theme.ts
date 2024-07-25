@@ -113,6 +113,9 @@ export const theme = createTheme({
     primary: {
       main: palette.primary.main,
     },
+    secondary: {
+      main: palette.primary.main,
+    },
     background: {
       default: palette.primary.background,
     },

@@ -27,9 +27,8 @@ const StyledSplash = styled.div`
 `;
 
 const StyledLogo = styled.img`
-  // width: 300px;
   height: 15%;
-  animation: ${pulse} 1s infinite; /* Aplica la animación */
+  animation: ${pulse} 1s infinite;
 `;
 
 export { StyledSplash, StyledLogo };
