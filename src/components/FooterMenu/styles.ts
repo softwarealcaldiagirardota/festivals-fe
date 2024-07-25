@@ -12,6 +12,7 @@ const StyledFooterMenu = styled.footer`
   height: 60px;
   padding: 16px 20px;
   border-top: 1px solid ${() => palette.primary.borderColor};
+  box-shadow: 0 -6px 7px -5px rgba(0, 0, 0, 0.3);
 `;
 
 const StyledIconContainer = styled.div`

@@ -42,3 +42,32 @@ export const messages = {
     "Conexión a Internet no disponible. Por favor, inténtalo de nuevo más tarde.",
   genericError: "Se produjo un error. Por favor, inténtalo de nuevo.",
 };
+
+export const formatDateTime = (date: Date) => {
+  const formatter = new Intl.DateTimeFormat("es-ES", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
+
+  const parts = formatter.formatToParts(date);
+  const formattedDate = parts
+    .filter((part) => part.type !== "literal")
+    .map((part) => part.value)
+    .join(" ");
+
+  return formattedDate.replace(",", "") + " " + formatAMPM(date);
+};
+
+export const formatAMPM = (date: Date) => {
+  let hours = date.getHours();
+  let minutes: number | string = date.getMinutes();
+  const ampm = hours >= 12 ? "p.m." : "a.m.";
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  return `${hours}:${minutes} ${ampm}`;
+};

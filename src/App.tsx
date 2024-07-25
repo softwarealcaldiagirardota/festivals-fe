@@ -9,6 +9,8 @@ import ProviderReports from "./pages/provider-reports";
 import Container from "./components/Container";
 import { Alert, Snackbar } from "@mui/material";
 import { useHeader } from "./context/header-context";
+import Sales from "./pages/company-reports/sales";
+import Buys from "./pages/company-reports/buys";
 
 const App = () => {
   const { snackBarState, handleSnackBarClose } = useHeader();
@@ -50,6 +52,22 @@ const App = () => {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/company-reports/sales"
+            element={
+              <PrivateRoute>
+                <Sales />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/company-reports/buys"
+            element={
+              <PrivateRoute>
+                <Buys />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </Container>
       <Snackbar
@@ -58,15 +76,7 @@ const App = () => {
         autoHideDuration={5000}
         onClose={handleSnackBarClose}
       >
-        <Alert
-          onClose={handleSnackBarClose}
-          severity="error"
-          variant="filled"
-          // sx={{
-          //   bgcolor: "red",
-          //   color: "white",
-          // }}
-        >
+        <Alert onClose={handleSnackBarClose} severity="error" variant="filled">
           {snackBarState?.message}
         </Alert>
       </Snackbar>

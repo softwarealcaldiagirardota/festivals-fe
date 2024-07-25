@@ -1,4 +1,4 @@
-import { SnackbarOrigin, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import {
   createContext,
   useContext,
