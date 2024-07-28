@@ -13,6 +13,7 @@ const StyledActions = styled("div")(() => ({
   marginBottom: "20px",
   borderRadius: "8px",
   backgroundColor: palette.neutral.W,
+  cursor: "pointer",
 }));
 
 const StyledBorder = styled("div")(() => ({

@@ -2,10 +2,11 @@ import Title from "../Title";
 import { StyledNumberButton } from "./styles";
 interface INumberButton {
   text: string;
+  onClick: () => void;
 }
-const NumberButton = ({ text }: INumberButton) => {
+const NumberButton = ({ text, onClick }: INumberButton) => {
   return (
-    <StyledNumberButton>
+    <StyledNumberButton onClick={onClick}>
       <Title text={text} type="small" />
     </StyledNumberButton>
   );

@@ -2,13 +2,19 @@ import { styled } from "@mui/material";
 import { palette } from "../../theme";
 
 const StyledNumberButton = styled("div")(() => ({
-  width: "30%",
-  height: "30%",
+  minWidth: "28%",
+  height: "22%",
   border: `1px solid ${palette.primary.borderColor}`,
   backgroundColor: palette.primary.background,
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  margin: "0 1.5%",
+  borderRadius: "8px",
+  cursor: "pointer",
+  "&:hover": {
+    backgroundColor: palette.primary.main,
+  },
 }));
 
 export { StyledNumberButton };

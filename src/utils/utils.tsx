@@ -71,3 +71,9 @@ export const formatAMPM = (date: Date) => {
   minutes = minutes < 10 ? "0" + minutes : minutes;
   return `${hours}:${minutes} ${ampm}`;
 };
+
+export const formatter = new Intl.NumberFormat("es-CO", {
+  style: "decimal",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
