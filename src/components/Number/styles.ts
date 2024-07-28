@@ -3,13 +3,13 @@ import { Typography } from "@mui/material";
 import { palette } from "../../theme";
 
 const StyledNumber = styled(Typography)(() => ({
-  fontWeight: "700",
-  fontSize: "70px",
-  lineHeight: "73px",
-  letterSpacing: "0.41px",
+  fontWeight: "400",
+  fontSize: "32px",
+  lineHeight: "42px",
+  letterSpacing: "3px",
   color: palette.primary.title,
   width: "100%",
-  height: "70px",
+  height: "40px",
   borderRadius: "8px",
   backgroundColor: palette.neutral.W,
 }));

@@ -3,7 +3,7 @@ import { palette } from "../../theme";
 
 const StyledNumberButton = styled("div")(() => ({
   minWidth: "28%",
-  height: "22%",
+  height: "18%",
   border: `1px solid ${palette.primary.borderColor}`,
   backgroundColor: palette.primary.background,
   display: "flex",

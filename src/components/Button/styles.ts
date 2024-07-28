@@ -9,6 +9,7 @@ const ButtonStyled = styled(Button)(
     borderRadius: "18px",
     color: isOutlined ? palette.neutral.white["0"] : palette.primary.main,
     border: "none",
+    margin: "10px 0",
   })
 );
 

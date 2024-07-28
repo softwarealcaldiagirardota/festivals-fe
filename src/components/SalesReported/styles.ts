@@ -9,7 +9,7 @@ const StyledSalesReported = styled("div")(() => ({
   alignItems: "center",
   width: "100%",
   height: "30px",
-  margin: "20px 0",
+  margin: "10px 0 20px 0",
 }));
 
 const StyledBackArrowText = styled(Typography)(() => ({

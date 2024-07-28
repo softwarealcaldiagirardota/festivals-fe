@@ -9,7 +9,7 @@ const StyledContainerSales = styled("div")(() => ({
   justifyContent: "space-between",
   width: "100%",
   height: "30vh",
-  margin: "40px 0",
+  margin: "10px 0 0 0",
 }));
 
 const StyledNumberButton = styled("div")(() => ({
@@ -34,6 +34,7 @@ const Container = styled("div")(({ isMobile }: { isMobile?: boolean }) => ({
   flexWrap: "wrap" as const,
   justifyContent: "space-between",
   width: isMobile ? "100%" : "25%",
+  overflowY: "auto" as const,
 }));
 
 export { StyledContainerSales, Container, StyledNumberButton };

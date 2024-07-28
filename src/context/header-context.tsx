@@ -30,7 +30,7 @@ export const HeaderProvider = ({ children }: { children: ReactNode }) => {
   const [online, setOnline] = useState<boolean>(navigator.onLine);
   const [title, setTitle] = useState<string>("");
   const [openDrawerMenu, setOpenDrawerMenu] = useState<boolean>(false);
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const [snackBarState, setSnackBarState] = useState<ISnackBarState>({
     open: false,
     message: "",

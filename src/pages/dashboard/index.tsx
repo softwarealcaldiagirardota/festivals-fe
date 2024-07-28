@@ -16,8 +16,8 @@ const Dashboard = () => {
 
   return (
     <>
-      <h1>Dashboard</h1>
-      <TextNumber value="€ / kg" />
+      {/* <h1>Dashboard</h1> */}
+      {/* <TextNumber value="€ / kg" />
       <Number value="1.41" />
       <Button text="Botón fondo entero" />
       <Button variant="outlined" text="Botón sin fondo" />
@@ -26,7 +26,7 @@ const Dashboard = () => {
       <Title text="Título pequeño" type="small" />
       <Description text="Descripción grande" />
       <Description isSmall text="Descripción pequeño" />
-      <StatusLabel value="Estado" />
+      <StatusLabel value="Estado" /> */}
     </>
   );
 };

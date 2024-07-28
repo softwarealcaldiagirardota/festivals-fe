@@ -23,7 +23,7 @@ const StyledSplash = styled.div`
   left: 0;
   right: 0;
   background-color: ${() => palette.primary.backgroundBlueFestivalChicharron};
-  z-index: 2;
+  z-index: 3;
 `;
 
 const StyledLogo = styled.img`

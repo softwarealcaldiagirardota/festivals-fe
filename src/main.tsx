@@ -31,6 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <App />
             <Footer />
           </BrowserRouter>
+          <div style={{ height: "200px", width: "100%" }}></div>
         </Auth0Provider>
       </HeaderProvider>
     </React.StrictMode>

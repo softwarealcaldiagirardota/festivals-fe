@@ -43,6 +43,7 @@ const Sales = () => {
         </StyledNumberButton>
       </StyledContainerSales>
       <Button onClick={handleSumReported} canContinue={true} text="Enviar" />
+      <Button variant="outlined" text="Ver anteriores" canContinue={true} />
     </Container>
   );
 };

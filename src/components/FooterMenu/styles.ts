@@ -2,8 +2,9 @@ import styled from "@emotion/styled";
 import { palette } from "../../theme";
 
 const StyledFooterMenu = styled.footer`
-  position: absolute;
+  position: fixed;
   display: flex;
+  z-index: 2;
   justify-content: space-between;
   align-items: center;
   bottom: 0;
@@ -11,6 +12,7 @@ const StyledFooterMenu = styled.footer`
   right: 0;
   height: 60px;
   padding: 16px 20px;
+  background-color: ${() => palette.primary.background};
   border-top: 1px solid ${() => palette.primary.borderColor};
   box-shadow: 0 -6px 7px -5px rgba(0, 0, 0, 0.3);
 `;
