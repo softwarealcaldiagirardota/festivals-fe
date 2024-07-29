@@ -32,7 +32,7 @@ const Sales = () => {
   return (
     <Container isMobile={isMobile}>
       <BackArrow />
-      <SalesReported value={reported.toString()} />
+      <SalesReported value={reported.toString()}isSalesReported={true} />
       <Number value={value?.length > 0 ? value : 0} />
       <StyledContainerSales>
         {arrayNumber.map((number) => (

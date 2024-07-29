@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useHeader } from "../../../../context/header-context";
 import { Container, StyledContainerSalesDetails } from "../styles";
 import BackArrow from "../../../../components/BackArrow";
-
 import SalesDetail from "../../../../components/Actions copy";
 import { formatDateTime } from "../../../../utils/utils";
 
@@ -14,7 +13,7 @@ const salesDetail = [
   },
   {
     id: "2",
-    value: 100,
+    value: 40,
     date: `${formatDateTime(new Date())}`,
   },
   {
@@ -28,11 +27,11 @@ const salesDetail = [
     date: `${formatDateTime(new Date())}`,
   },
 ];
-const ReportsSalesDetails = () => {
+const ReportsBuysDetails = () => {
   const { setTitle, isMobile } = useHeader();
 
   useEffect(() => {
-    setTitle("Detalle de ventas");
+    setTitle("Detalle de compras");
   }, []);
 
   return (
@@ -40,11 +39,15 @@ const ReportsSalesDetails = () => {
       <BackArrow />
       <StyledContainerSalesDetails>
         {salesDetail.map((detail) => (
-          <SalesDetail key={detail.id} text={detail.value} date={detail.date} isSales={true} />
+          <SalesDetail
+            key={detail.id}
+            text={detail.value} 
+            date={detail.date}
+          />
         ))}
       </StyledContainerSalesDetails>
     </Container>
   );
 };
 
-export default ReportsSalesDetails;
+export default ReportsBuysDetails;
