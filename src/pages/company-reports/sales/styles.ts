@@ -37,4 +37,18 @@ const Container = styled("div")(({ isMobile }: { isMobile?: boolean }) => ({
   overflowY: "auto" as const,
 }));
 
-export { StyledContainerSales, Container, StyledNumberButton };
+const StyledContainerSalesDetails = styled("div")(() => ({
+  display: "flex",
+  flexDirection: "column" as const,
+  alignItems: " flex-start",
+  justifyContent: " flex-start",
+  width: "100%",
+  marginTop: "10px",
+}));
+
+export {
+  StyledContainerSales,
+  StyledContainerSalesDetails,
+  Container,
+  StyledNumberButton,
+};

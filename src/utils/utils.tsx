@@ -43,33 +43,44 @@ export const messages = {
   genericError: "Se produjo un error. Por favor, inténtalo de nuevo.",
 };
 
+const capitalizeFirstLetter = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 export const formatDateTime = (date: Date) => {
-  const formatter = new Intl.DateTimeFormat("es-ES", {
-    month: "long",
+  const dateFormatter = new Intl.DateTimeFormat("es-CO", {
+    weekday: "long",
     day: "numeric",
-    year: "numeric",
+  });
+  const dateParts = dateFormatter.formatToParts(date);
+  //@ts-ignore
+  const dayOfWeek = dateParts.find((part) => part.type === "weekday").value;
+  //@ts-ignore
+  const dayOfMonth = dateParts.find((part) => part.type === "day").value;
+
+  const timeFormatter = new Intl.DateTimeFormat("es-CO", {
     hour: "numeric",
     minute: "numeric",
     hour12: true,
   });
 
-  const parts = formatter.formatToParts(date);
-  const formattedDate = parts
-    .filter((part) => part.type !== "literal")
-    .map((part) => part.value)
-    .join(" ");
+  const timeParts = timeFormatter.formatToParts(date);
+  const formattedTime = timeParts
+    .map((part) => {
+      switch (part.type) {
+        case "hour":
+        case "minute":
+        case "dayPeriod":
+          return part.value;
+        case "literal":
+          return part.value === ":" ? ":" : " ";
+        default:
+          return "";
+      }
+    })
+    .join("");
 
-  return formattedDate.replace(",", "") + " " + formatAMPM(date);
-};
-
-export const formatAMPM = (date: Date) => {
-  let hours = date.getHours();
-  let minutes: number | string = date.getMinutes();
-  const ampm = hours >= 12 ? "p.m." : "a.m.";
-  hours = hours % 12;
-  hours = hours ? hours : 12;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  return `${hours}:${minutes} ${ampm}`;
+  return `${capitalizeFirstLetter(dayOfWeek)} ${dayOfMonth}, ${formattedTime}`;
 };
 
 export const formatter = new Intl.NumberFormat("es-CO", {

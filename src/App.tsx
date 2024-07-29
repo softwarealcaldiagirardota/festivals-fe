@@ -11,6 +11,7 @@ import { Alert, Snackbar } from "@mui/material";
 import { useHeader } from "./context/header-context";
 import Sales from "./pages/company-reports/sales";
 import Buys from "./pages/company-reports/buys";
+import ReportsSalesDetails from "./pages/company-reports/sales/details";
 
 const App = () => {
   const { snackBarState, handleSnackBarClose } = useHeader();
@@ -65,6 +66,14 @@ const App = () => {
             element={
               <PrivateRoute>
                 <Buys />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/company-reports/sales/detail"
+            element={
+              <PrivateRoute>
+                <ReportsSalesDetails />
               </PrivateRoute>
             }
           />

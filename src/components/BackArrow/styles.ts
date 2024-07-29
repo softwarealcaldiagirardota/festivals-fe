@@ -10,6 +10,7 @@ const StyledBackArrow = styled("div")(() => ({
   width: "100%",
   height: "30px",
   marginBottom: "10px",
+  cursor: "pointer",
 }));
 
 const StyledBackArrowText = styled(Typography)(() => ({
