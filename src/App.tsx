@@ -79,7 +79,7 @@ const App = () => {
             }
           />
 
-<Route
+          <Route
             path="/company-reports/buys/detail"
             element={
               <PrivateRoute>

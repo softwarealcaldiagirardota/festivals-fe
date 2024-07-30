@@ -88,3 +88,6 @@ export const formatter = new Intl.NumberFormat("es-CO", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
+
+export const UNIDADES = " ud.";
+export const KG = " kg.";

@@ -5,7 +5,7 @@ import BackArrow from "../../../../components/BackArrow";
 import SalesDetail from "../../../../components/Actions copy";
 import { formatDateTime } from "../../../../utils/utils";
 
-const salesDetail = [
+const  buysDetails = [
   {
     id: "1",
     value: 40,
@@ -38,7 +38,7 @@ const ReportsBuysDetails = () => {
     <Container isMobile={isMobile}>
       <BackArrow />
       <StyledContainerSalesDetails>
-        {salesDetail.map((detail) => (
+        { buysDetails.map((detail) => (
           <SalesDetail
             key={detail.id}
             text={detail.value} 

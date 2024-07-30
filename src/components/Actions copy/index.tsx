@@ -1,4 +1,4 @@
-import { formatter } from "../../utils/utils";
+import { formatter, KG, UNIDADES } from "../../utils/utils";
 import Title from "../Title";
 import { StyledActions, StyledBorder, StyledDate } from "./styles";
 
@@ -11,7 +11,7 @@ const SalesDetail = ({ text, date, isSales, ...rest }: IActions) => {
   return (
     <StyledActions {...rest}>
       <StyledBorder />
-      <Title text={`${formatter.format(text)}${isSales ? " ud.": " kg"}`}type="small" />
+      <Title text={`${formatter.format(text)}${isSales ? UNIDADES : KG}`}type="small" />
       <StyledDate>{date}</StyledDate>
     </StyledActions>
   );
