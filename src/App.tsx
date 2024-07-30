@@ -12,6 +12,7 @@ import { useHeader } from "./context/header-context";
 import Sales from "./pages/company-reports/sales";
 import Buys from "./pages/company-reports/buys";
 import ReportsSalesDetails from "./pages/company-reports/sales/details";
+import ReportsBuysDetails from "./pages/company-reports/buys/details";
 
 const App = () => {
   const { snackBarState, handleSnackBarClose } = useHeader();
@@ -74,6 +75,15 @@ const App = () => {
             element={
               <PrivateRoute>
                 <ReportsSalesDetails />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/company-reports/buys/detail"
+            element={
+              <PrivateRoute>
+                <ReportsBuysDetails />
               </PrivateRoute>
             }
           />
