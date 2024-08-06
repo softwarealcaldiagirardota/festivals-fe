@@ -24,6 +24,7 @@ interface PropColor {
   backgroundBlueFestivalChicharron?: string;
   borderColor?: string;
   star?: string;
+  grey?: string;
   0?: string;
   1?: string;
   2?: string;
@@ -67,6 +68,7 @@ export const palette: PropsPalette = {
     backgroundBlueFestivalChicharron: "#0BCE83",
     borderColor: "#D9D0E3",
     star: "#faaf00",
+    grey: "#7E7E7E",
     "1": "#513CE1",
     "2": "#29D99A",
     "3": "#FDB600",

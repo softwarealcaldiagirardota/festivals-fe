@@ -12,6 +12,29 @@
   width: 100%;
 }
 
+/* Estilo del contenedor de scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+/* Estilo de la pista del scrollbar */
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+/* Estilo del pulgar del scrollbar */
+::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+/* Estilo del pulgar del scrollbar en hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #9586a8;
+}
+
 body {
   display: flex;
   justify-content: center;

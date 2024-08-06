@@ -85,8 +85,8 @@ export const formatDateTime = (date: Date) => {
 
 export const formatter = new Intl.NumberFormat("es-CO", {
   style: "decimal",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0,
 });
 
 export const UNIDADES = " ud.";
