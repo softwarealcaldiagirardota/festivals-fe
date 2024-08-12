@@ -7,7 +7,6 @@ import CardsDetails from "./components/cards-details";
 
 const Dashboard = () => {
   const { setTitle } = useHeader();
-  const { isMobile } = useHeader();
 
   useEffect(() => {
     setTitle("Dashboard");

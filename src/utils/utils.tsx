@@ -1,10 +1,4 @@
-import {
-  AddBusiness,
-  Gavel,
-  HowToVote,
-  Poll,
-  Receipt,
-} from "@mui/icons-material";
+import { AddBusiness, HowToVote, Poll } from "@mui/icons-material";
 import { palette } from "../theme";
 
 const colorIcon = palette.neutral.B;

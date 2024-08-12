@@ -5,7 +5,6 @@ import Title from "../title";
 import { StyledCircle, StyledContainerTotalCards, StyledTexts } from "./styles";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
-import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 
 const totalSales2023 = 42949;
 const totalSales2023Money = 515388000;

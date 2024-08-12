@@ -48,7 +48,7 @@ const ClientVotes = () => {
         ? getCodeUser(codeInput)
         : getCodeUser(code);
       const response = await fetch(
-        `http://festival-ms-girardota.us-east-1.elasticbeanstalk.com/api/Company/code/${companyCode}`
+        `https://festival-ms-girardota.us-east-1.elasticbeanstalk.com/api/Company/code/${companyCode}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -74,7 +74,7 @@ const ClientVotes = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "http://festival-ms-girardota.us-east-1.elasticbeanstalk.com/api/Festival/2"
+        "https://festival-ms-girardota.us-east-1.elasticbeanstalk.com/api/Festival/2"
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -114,6 +114,7 @@ const ClientVotes = () => {
         ...prevRatings,
         [id]: newValue,
       }));
+      console.log(event);
     };
 
   const handleSubmit = async () => {
@@ -129,7 +130,7 @@ const ClientVotes = () => {
     }));
     try {
       const res = await fetch(
-        "http://festival-ms-girardota.us-east-1.elasticbeanstalk.com/Vote",
+        "https://festival-ms-girardota.us-east-1.elasticbeanstalk.com/Vote",
         {
           method: "POST",
           headers: {
