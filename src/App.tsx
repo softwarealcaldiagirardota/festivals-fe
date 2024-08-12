@@ -15,7 +15,7 @@ import ReportsSalesDetails from "./pages/company-reports/sales/details";
 import ReportsBuysDetails from "./pages/company-reports/buys/details";
 
 const App = () => {
-  const { snackBarState, handleSnackBarClose } = useHeader();
+  const { snackBarState, handleSnackBarClose, setAuth0Token } = useHeader();
   return (
     <>
       <Container>
@@ -25,7 +25,7 @@ const App = () => {
           <Route
             path="/company-reports"
             element={
-              <PrivateRoute>
+              <PrivateRoute setAuth0Token={setAuth0Token}>
                 <CompanyReports />
               </PrivateRoute>
             }
@@ -33,7 +33,7 @@ const App = () => {
           <Route
             path="/dashboard"
             element={
-              <PrivateRoute>
+              <PrivateRoute setAuth0Token={setAuth0Token}>
                 <Dashboard />
               </PrivateRoute>
             }
@@ -41,7 +41,7 @@ const App = () => {
           <Route
             path="/judge-votes"
             element={
-              <PrivateRoute>
+              <PrivateRoute setAuth0Token={setAuth0Token}>
                 <JudgeVotes />
               </PrivateRoute>
             }
@@ -49,7 +49,7 @@ const App = () => {
           <Route
             path="/provider-reports"
             element={
-              <PrivateRoute>
+              <PrivateRoute setAuth0Token={setAuth0Token}>
                 <ProviderReports />
               </PrivateRoute>
             }
@@ -57,7 +57,7 @@ const App = () => {
           <Route
             path="/company-reports/sales"
             element={
-              <PrivateRoute>
+              <PrivateRoute setAuth0Token={setAuth0Token}>
                 <Sales />
               </PrivateRoute>
             }
@@ -65,7 +65,7 @@ const App = () => {
           <Route
             path="/company-reports/buys"
             element={
-              <PrivateRoute>
+              <PrivateRoute setAuth0Token={setAuth0Token}>
                 <Buys />
               </PrivateRoute>
             }
@@ -73,7 +73,7 @@ const App = () => {
           <Route
             path="/company-reports/sales/detail"
             element={
-              <PrivateRoute>
+              <PrivateRoute setAuth0Token={setAuth0Token}>
                 <ReportsSalesDetails />
               </PrivateRoute>
             }
@@ -82,7 +82,7 @@ const App = () => {
           <Route
             path="/company-reports/buys/detail"
             element={
-              <PrivateRoute>
+              <PrivateRoute setAuth0Token={setAuth0Token}>
                 <ReportsBuysDetails />
               </PrivateRoute>
             }

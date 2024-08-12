@@ -24,6 +24,8 @@ interface HeaderContextType {
   handleSnackBarClose: () => void;
   online?: boolean;
   showLoginButton?: boolean;
+  auth0Token?: string;
+  setAuth0Token: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
@@ -37,6 +39,7 @@ export const HeaderProvider = ({ children }: { children: ReactNode }) => {
     open: false,
     message: "",
   });
+  const [auth0Token, setAuth0Token] = useState<string>("");
   const showLoginButton = pathnamePermission.includes(window.location.pathname);
 
   useEffect(() => {
@@ -73,6 +76,8 @@ export const HeaderProvider = ({ children }: { children: ReactNode }) => {
         handleSnackBarClose,
         online,
         showLoginButton,
+        auth0Token,
+        setAuth0Token,
       }}
     >
       {children}

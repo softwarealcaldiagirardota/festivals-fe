@@ -65,6 +65,7 @@ const ClientVotes = () => {
         }
       }
     } catch (error) {
+      setShowSplash(false);
       showSnackBar({
         message: messages.errorGettingCompanyName,
       });
@@ -88,6 +89,7 @@ const ClientVotes = () => {
       const newData = { ...data?.data, question: newQuestions };
       setDataQuestions(newData);
     } catch (error) {
+      setShowSplash(false);
       showSnackBar({
         message: messages.errorGettingQuestions,
       });
