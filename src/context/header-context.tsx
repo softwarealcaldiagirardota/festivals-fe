@@ -7,6 +7,7 @@ import {
   useEffect,
 } from "react";
 import { theme } from "../theme";
+import { pathnamePermission } from "../utils/utils";
 
 interface ISnackBarState {
   open?: boolean;
@@ -22,6 +23,7 @@ interface HeaderContextType {
   snackBarState: ISnackBarState;
   handleSnackBarClose: () => void;
   online?: boolean;
+  showLoginButton?: boolean;
 }
 
 const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
@@ -35,6 +37,7 @@ export const HeaderProvider = ({ children }: { children: ReactNode }) => {
     open: false,
     message: "",
   });
+  const showLoginButton = pathnamePermission.includes(window.location.pathname);
 
   useEffect(() => {
     window.addEventListener("online", function () {
@@ -69,6 +72,7 @@ export const HeaderProvider = ({ children }: { children: ReactNode }) => {
         snackBarState,
         handleSnackBarClose,
         online,
+        showLoginButton,
       }}
     >
       {children}

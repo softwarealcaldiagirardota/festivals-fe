@@ -4,13 +4,13 @@ import logoError from "../../assets/splash-2.png";
 import Title from "../Title";
 import Button from "../Button";
 import { useHeader } from "../../context/header-context";
+import { voteAgain } from "../../utils/utils";
 
 interface IConfirmationSplash {
   isError?: boolean;
 }
 
 const ConfirmationSplash = ({ isError }: IConfirmationSplash) => {
-  const handleSubmit = () => (window.location.href = "http://localhost:5173");
   const { isMobile } = useHeader();
   return (
     <StyledSplash isMobile={isMobile}>
@@ -19,14 +19,8 @@ const ConfirmationSplash = ({ isError }: IConfirmationSplash) => {
         type="medium"
         color="white"
       />
-
       <StyledLogo src={isError ? logoError : logo} alt="Logo" />
-      <Title
-        text="¿Te gustaría probar otro chicharrón?"
-        type="small"
-        color="white"
-      />
-      <Button text="Vamos" canContinue={true} onClick={handleSubmit} />
+      <Button text="Tengo otro código" canContinue={true} onClick={voteAgain} />
     </StyledSplash>
   );
 };

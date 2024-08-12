@@ -6,33 +6,99 @@ import {
   StyledBoxQuestion,
   StyledBoxVoting,
   StyledClientVotesView,
+  StyledInputCodeContainer,
 } from "./styles";
 import Steper from "../../components/Steper";
 import { Box, Rating } from "@mui/material";
 import Button from "../../components/Button";
 import ConfirmationSplash from "../../components/ConfirmationSplash";
-import { messages } from "../../utils/utils";
-
-const steps = ["Sabor", "Presentación", "Satisfecho"];
-const questions = [
-  { id: 1, label: "¿Qué tal el sabor de este chicharrón?", step: 0 },
-  { id: 2, label: "¿Qué tal la presentación del producto?", step: 1 },
-  { id: 3, label: "¿Quedaste satisfecho con este chicharrón?", step: 2 },
-];
+import {
+  getCodeUser,
+  messages,
+  validateCodeStructure,
+} from "../../utils/utils";
+import { useLocation } from "react-router-dom";
+import { IClientVotes, Question, Survey, steps } from "./interfaces";
+import NotExistCodeSplash from "../../components/NotExistCodeSplash";
+import InputFieldCode from "../../components/InputFieldCode";
 
 const ClientVotes = () => {
   const { setTitle, isMobile, showSnackBar, online } = useHeader();
+  const [dataQuestions, setDataQuestions] = useState({} as Survey);
+  const [dataCompany, setDataCompany] = useState({} as IClientVotes);
+  const [notExistCode, setNotExistCode] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [nextStep, setNextStep] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [codeInput, setCodeInput] = useState("");
+  const [showSplash, setShowSplash] = useState(true);
+  const [showQuestion, setshowQuestion] = useState(false);
   const [ratings, setRatings] = useState<{ [key: number]: number | null }>({
     1: null,
     2: null,
     3: null,
   });
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const code = queryParams.get("code");
+
+  const fetchCompanyName = async (codeInput?: string) => {
+    try {
+      const companyCode = codeInput
+        ? getCodeUser(codeInput)
+        : getCodeUser(code);
+      const response = await fetch(
+        `http://festival-ms-girardota.us-east-1.elasticbeanstalk.com/api/Company/code/${companyCode}`
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      if (data?.data?.id === 0) {
+        setShowSplash(false);
+        setNotExistCode(true);
+      } else {
+        setDataCompany(data?.data);
+        if (codeInput) {
+          setshowQuestion(true);
+          setShowSplash(false);
+        }
+      }
+    } catch (error) {
+      showSnackBar({
+        message: messages.errorGettingCompanyName,
+      });
+    }
+  };
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "http://festival-ms-girardota.us-east-1.elasticbeanstalk.com/api/Festival/2"
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      const newQuestions = data?.data?.question?.map(
+        (question: Question, index: number) => {
+          return { ...question, step: index };
+        }
+      );
+      const newData = { ...data?.data, question: newQuestions };
+      setDataQuestions(newData);
+    } catch (error) {
+      showSnackBar({
+        message: messages.errorGettingQuestions,
+      });
+    }
+  };
 
   useEffect(() => {
-    setTitle("Evaluación");
-  }, []);
+    setTitle(showQuestion ? "Evaluar producto" : "Verificar código");
+    if (dataCompany?.id !== 0 && dataQuestions?.question?.length > 0)
+      setShowSplash(false);
+  }, [dataCompany?.description, dataQuestions?.question?.length]);
 
   const handleCurrentStep = () => {
     setCurrentStep((prevStep) => prevStep + 1);
@@ -50,16 +116,57 @@ const ClientVotes = () => {
       }));
     };
 
-  const [showSplash, setShowSplash] = useState(true);
+  const handleSubmit = async () => {
+    if (!online) {
+      showSnackBar({
+        message: messages.internetError,
+      });
+      return;
+    }
+    const payload = Object.entries(ratings).map(([key, value]) => ({
+      idQuestion: parseInt(key),
+      idAnswer: value,
+    }));
+    try {
+      const res = await fetch(
+        "http://festival-ms-girardota.us-east-1.elasticbeanstalk.com/Vote",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            code: code || codeInput,
+            "id-festival": "2",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+      const data = await res.json();
+      if (!data?.state && !data?.data) {
+        setNotExistCode(true);
+        return;
+      }
+      setSaved(true);
+    } catch (error) {
+      showSnackBar({
+        message: messages.genericError,
+      });
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
+      fetchData();
+      if (code) {
+        fetchCompanyName();
+        setshowQuestion(true);
+        return;
+      }
       setShowSplash(false);
-    }, 4000);
+    }, 2000);
 
     const timeout = setTimeout(() => {
       clearInterval(interval);
-    }, 4000);
+    }, 2000);
 
     return () => {
       clearInterval(interval);
@@ -67,36 +174,46 @@ const ClientVotes = () => {
     };
   }, []);
 
-  const [saved, setSaved] = useState(false);
-  const handleSubmit = () => {
-    if (!online) {
-      showSnackBar({
-        message: messages.internetError,
-      });
-      return;
-    }
-    showSnackBar({
-      message: messages.genericError,
-    });
-    setSaved(true);
+  const handleValidateCode = () => {
+    setShowSplash(true);
+    fetchCompanyName(codeInput);
   };
 
   return (
     <>
       {saved && <ConfirmationSplash />}
+      {notExistCode && <NotExistCodeSplash />}
       {showSplash && <Splash />}
-      {!showSplash && (
+      {!showQuestion && (
         <StyledClientVotesView isMobile={isMobile}>
-          <Title text="Postre de chicharrón" type="medium" />
+          <Title text="Introduce tu código para continuar" type="xs" isMenu />
+          <StyledInputCodeContainer>
+            <InputFieldCode setCode={setCodeInput} code={codeInput} />
+          </StyledInputCodeContainer>
+          <Button
+            text="Continuar"
+            canContinue={validateCodeStructure(codeInput) ? true : false}
+            onClick={handleValidateCode}
+          />
+        </StyledClientVotesView>
+      )}
+      {!showSplash && showQuestion && (
+        <StyledClientVotesView isMobile={isMobile}>
+          <Title text={dataCompany?.description?.split("-")[1]} type="medium" />
+          <Title
+            isMenu
+            text={dataCompany?.description?.split("-")[0]}
+            type="xs"
+          />
           <Box sx={{ marginTop: "40px", width: "100%" }}>
             <Steper steps={steps} currentStep={currentStep} />
           </Box>
-          {questions.map((question) => {
+          {dataQuestions?.question?.map((question) => {
             if (question.step !== currentStep) return null;
             return (
-              <StyledBoxQuestion>
+              <StyledBoxQuestion key={question.description}>
                 <Box sx={{ marginTop: "12px" }}>
-                  <Title text={question.label} type="xs" />
+                  <Title text={question.description} type="xs" />
                 </Box>
                 <StyledBoxVoting>
                   <Rating

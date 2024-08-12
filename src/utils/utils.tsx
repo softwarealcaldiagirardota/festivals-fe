@@ -20,16 +20,16 @@ export const menuItems = [
     url: "/company-reports",
     icon: <AddBusiness sx={{ color: colorIcon, fontSize: fontSize }} />,
   },
-  {
-    label: "Jurado",
-    url: "/judge-votes",
-    icon: <Gavel sx={{ color: colorIcon, fontSize: fontSize }} />,
-  },
-  {
-    label: "Proveedor",
-    url: "/provider-reports",
-    icon: <Receipt sx={{ color: colorIcon, fontSize: fontSize }} />,
-  },
+  // {
+  //   label: "Jurado",
+  //   url: "/judge-votes",
+  //   icon: <Gavel sx={{ color: colorIcon, fontSize: fontSize }} />,
+  // },
+  // {
+  //   label: "Proveedor",
+  //   url: "/provider-reports",
+  //   icon: <Receipt sx={{ color: colorIcon, fontSize: fontSize }} />,
+  // },
   {
     label: "Calificar",
     url: "/client-votes",
@@ -41,6 +41,20 @@ export const messages = {
   internetError:
     "Conexión a Internet no disponible. Por favor, inténtalo de nuevo más tarde.",
   genericError: "Se produjo un error. Por favor, inténtalo de nuevo.",
+  errorGettingCompanyName:
+    "Se produjo un error obteniendo el nombre del comercio. Por favor, inténtalo de nuevo.",
+  errorGettingQuestions:
+    "Se produjo un error obteniendo las preguntas. Por favor, inténtalo de nuevo.",
+};
+
+export const validateCodeStructure = (code: string): boolean => {
+  const regex = /^[A-Za-z0-9]{4}-[A-Za-z0-9]{5}$/;
+  return regex.test(code);
+};
+
+export const getCodeUser = (code: string | null): string => {
+  if (!code) return "";
+  return code?.split("-")[1];
 };
 
 const capitalizeFirstLetter = (string: string) => {
@@ -91,3 +105,23 @@ export const formatter = new Intl.NumberFormat("es-CO", {
 
 export const UNIDADES = " ud.";
 export const KG = " kg.";
+
+export const voteAgain = () => {
+  const currentUrl = window.location.href;
+  const url = new URL(currentUrl);
+  const domain = `${url.protocol}//${url.host}`;
+  const cleanUrl = `${domain}/client-votes`;
+  window.history.replaceState({}, document.title, cleanUrl);
+  window.location.replace(cleanUrl);
+};
+
+export const pathnamePermission = [
+  "/dashboard",
+  "/company-reports",
+  "/company-reports/sales",
+  "/company-reports/buys",
+  "/company-reports/sales/detail",
+  "/company-reports/buys/detail",
+  "/judge-votes",
+  "/",
+];

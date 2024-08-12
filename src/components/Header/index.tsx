@@ -6,9 +6,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const Header = () => {
-  const { title, setOpenDrawerMenu, openDrawerMenu, isMobile } = useHeader();
+  const {
+    title,
+    setOpenDrawerMenu,
+    openDrawerMenu,
+    isMobile,
+    showLoginButton,
+  } = useHeader();
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-
   const handleDrawerMenu = () => setOpenDrawerMenu(!openDrawerMenu);
   return (
     <StyledHeader>
@@ -17,7 +22,7 @@ const Header = () => {
       {isAuthenticated && (
         <StatusLabel handleClick={() => logout()} value={"Logout"} />
       )}
-      {!isAuthenticated && (
+      {!isAuthenticated && showLoginButton && (
         <StatusLabel handleClick={() => loginWithRedirect()} value={"Login"} />
       )}
     </StyledHeader>

@@ -5,7 +5,7 @@ const StyledFooterMenu = styled.footer`
   position: fixed;
   display: flex;
   z-index: 2;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   bottom: 0;
   left: 0;

@@ -4,10 +4,12 @@ import { menuItems } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
-  const { isMobile } = useHeader();
+  const { isMobile, showLoginButton } = useHeader();
   const navigate = useNavigate();
   const handleNavigate = (url: string) => navigate(url);
   if (!isMobile) return null;
+
+  if (!showLoginButton) return null;
   return (
     <StyledFooterMenu>
       {menuItems.map((item, index) => (

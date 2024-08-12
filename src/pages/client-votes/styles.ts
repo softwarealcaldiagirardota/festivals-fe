@@ -43,4 +43,14 @@ const StyledBoxVoting = styled(Box)(() => ({
   width: "100%",
 }));
 
-export { StyledClientVotesView, StyledBoxQuestion, StyledBoxVoting };
+const StyledInputCodeContainer = styled(Box)(() => ({
+  margin: "24px 0",
+  width: "100%",
+}));
+
+export {
+  StyledClientVotesView,
+  StyledBoxQuestion,
+  StyledBoxVoting,
+  StyledInputCodeContainer,
+};

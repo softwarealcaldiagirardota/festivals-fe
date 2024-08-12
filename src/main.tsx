@@ -13,6 +13,7 @@ import Footer from "./components/FooterMenu/index.tsx";
 
 const domain = "dev-t7qrzenx1neaggbp.us.auth0.com"; //import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = "NxzOyJPPDsH8EklQOCJot9IcGpD7Gnso"; //import.meta.env.VITE_AUTH0_CLIENT_ID;
+const audience = "https://ferias.girardotabackoffice.com";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <ThemeProvider theme={theme}>
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           clientId={clientId}
           authorizationParams={{
             redirect_uri: window.location.origin,
+            audience: audience,
           }}
         >
           <BrowserRouter>
