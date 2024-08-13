@@ -13,6 +13,8 @@ import Sales from "./pages/company-reports/sales";
 import Buys from "./pages/company-reports/buys";
 import ReportsSalesDetails from "./pages/company-reports/sales/details";
 import ReportsBuysDetails from "./pages/company-reports/buys/details";
+import HomeImage from "./pages/home";
+
 
 const App = () => {
   const { snackBarState, handleSnackBarClose, setAuth0Token } = useHeader();
@@ -22,12 +24,16 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/client-votes" element={<ClientVotes />} />
+          <Route path="/Home" element={<HomeImage />} />
           <Route
             path="/company-reports"
             element={
               <PrivateRoute setAuth0Token={setAuth0Token}>
                 <CompanyReports />
+             
+                
               </PrivateRoute>
+              
             }
           />
           <Route
@@ -35,6 +41,7 @@ const App = () => {
             element={
               <PrivateRoute setAuth0Token={setAuth0Token}>
                 <Dashboard />
+                
               </PrivateRoute>
             }
           />
