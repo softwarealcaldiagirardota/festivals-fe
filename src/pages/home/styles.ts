@@ -19,6 +19,7 @@ export const StyledImage = styled("img")(
   ({ isMobile, isList }: { isMobile?: boolean; isList?: boolean }) => ({
     width: "100vw",
     display: "block",
+    margin: "auto auto",
     ...(!isMobile && !isList && { height: "100vh" }),
   })
 );

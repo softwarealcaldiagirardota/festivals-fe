@@ -17,6 +17,7 @@ import HomeImage from "./pages/home";
 import DishList from "./pages/home/dish-list";
 import ScheduleList from "./pages/home/scheduled-list";
 import NotFound from "./pages/404";
+import Calm from "./pages/home/calm";
 
 const App = () => {
   const { snackBarState, handleSnackBarClose, setAuth0Token } = useHeader();
@@ -26,6 +27,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomeImage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/calm" element={<Calm />} />
           <Route path="/client-votes" element={<ClientVotes />} />
           <Route path="/home" element={<HomeImage />} />
           <Route path="/home/dish-list" element={<DishList />} />
