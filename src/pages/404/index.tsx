@@ -1,10 +1,21 @@
-const NotFound = () => {
+import { StyledContainer, StyledImage } from './styles';
+import propuestaDesktop from '../../assets/404-error-page.png';
+import propuestaMobile from '../../assets/404-error-pageMobile.png';
+import { useHeader } from '../../context/header-context';
+
+const SingleImage = () => {
+  const { isMobile } = useHeader();
+  const isMobileValue = isMobile ?? false; 
+
   return (
-    <div>
-      <h1>404 - Page Not Found</h1>
-      <p>The page you are looking for does not exist.</p>
-    </div>
+    <StyledContainer>
+      <StyledImage
+        isMobile={isMobileValue} 
+        src={isMobileValue ? propuestaMobile : propuestaDesktop}
+        alt="Participantes feria del chicharrón Girardota"
+      />
+    </StyledContainer>
   );
 };
 
-export default NotFound;
+export default SingleImage;
