@@ -24,7 +24,7 @@ const App = () => {
     <>
       <Container>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<HomeImage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/client-votes" element={<ClientVotes />} />
           <Route path="/home" element={<HomeImage />} />

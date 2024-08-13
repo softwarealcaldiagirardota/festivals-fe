@@ -117,5 +117,5 @@ export const pathnamePermission = [
   "/company-reports/sales/detail",
   "/company-reports/buys/detail",
   "/judge-votes",
-  "/",
+  "/login",
 ];

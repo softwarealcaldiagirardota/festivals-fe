@@ -5,6 +5,9 @@ import Splash from "../../components/Splash";
 
 const Login = () => {
   const { isAuthenticated, isLoading, user } = useAuth0();
+  console.log("***isLoading", isLoading);
+  console.log("***isAuthenticated", isAuthenticated);
+  console.log("***user", user);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,8 +17,11 @@ const Login = () => {
       navigate("/company-reports");
   }, [isAuthenticated, isLoading, user]);
 
-  if (!isAuthenticated && !isLoading)
+  if (!isAuthenticated && isLoading && !user) return <div>Cargando...</div>;
+
+  if (!isAuthenticated && !user?.email)
     return <div>Inicia sesión para continuar</div>;
+
   return <Splash />;
 };
 
