@@ -11,6 +11,8 @@ const DishList = () => {
     <StyledContainer>
       <StyledGoBack onClick={() => navigate(-1)}>{"<"}</StyledGoBack>
       <StyledImage
+        isList={true}
+        isMobile={isMobile}
         src={isMobile ? listaPropuestaMobile : listaPropuestaDesktop}
         alt="Participantes feria del chicharrón Girardota"
       />

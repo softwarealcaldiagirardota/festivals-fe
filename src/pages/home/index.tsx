@@ -13,22 +13,27 @@ const HomeImage = () => {
   const { isMobile } = useHeader();
   return (
     <StyledContainer>
+      <Link to="/client-votes">
+        <StyledImage
+          isMobile={isMobile}
+          src={
+            isMobile ? evaluarParticipanteMobile : evaluarParticipanteDesktop
+          }
+          alt="Calificación feria del chicharrón"
+        />
+      </Link>
       <Link to="/home/dish-list">
         <StyledImage
+          isMobile={isMobile}
           src={isMobile ? propuestaMobile : propuestaDesktop}
           alt="Participantes feria del chicharrón Girardota"
         />
       </Link>
       <Link to="/home/scheduled-list">
         <StyledImage
+          isMobile={isMobile}
           src={isMobile ? programacionMobile : programacionDesktop}
           alt="Programación feria del chicharrón Girardota"
-        />
-      </Link>
-      <Link to="/client-votes">
-        <StyledImage
-        src={isMobile ? evaluarParticipanteMobile : evaluarParticipanteDesktop}
-          alt="Calificación feria del chicharrón"
         />
       </Link>
     </StyledContainer>

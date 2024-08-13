@@ -11,6 +11,8 @@ const ScheduleList = () => {
     <StyledContainer>
       <StyledGoBack onClick={() => navigate(-1)}>{"<"}</StyledGoBack>
       <StyledImage
+        isList={true}
+        isMobile={isMobile}
         src={isMobile ? listaProgramacionMobile : listaProgramacionDesktop}
         alt="Participantes feria del chicharrón Girardota"
       />

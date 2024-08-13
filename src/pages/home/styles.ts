@@ -15,10 +15,13 @@ export const StyledContainer = styled(Box)(() => ({
   bottom: 0,
   zIndex: 10,
 }));
-export const StyledImage = styled("img")(() => ({
-  width: "100vw",
-  display: "block",
-}));
+export const StyledImage = styled("img")(
+  ({ isMobile, isList }: { isMobile?: boolean; isList?: boolean }) => ({
+    width: "100vw",
+    display: "block",
+    ...(!isMobile && !isList && { height: "100vh" }),
+  })
+);
 
 export const StyledGoBack = styled(Typography)(() => ({
   fontWeight: "700",
