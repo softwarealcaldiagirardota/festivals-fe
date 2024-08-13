@@ -16,6 +16,7 @@ import ReportsBuysDetails from "./pages/company-reports/buys/details";
 import HomeImage from "./pages/home";
 import DishList from "./pages/home/dish-list";
 import ScheduleList from "./pages/home/scheduled-list";
+import NotFound from "./pages/404";
 
 const App = () => {
   const { snackBarState, handleSnackBarClose, setAuth0Token } = useHeader();
@@ -94,6 +95,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>
       <Snackbar
