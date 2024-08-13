@@ -13,6 +13,9 @@ import Sales from "./pages/company-reports/sales";
 import Buys from "./pages/company-reports/buys";
 import ReportsSalesDetails from "./pages/company-reports/sales/details";
 import ReportsBuysDetails from "./pages/company-reports/buys/details";
+import HomeImage from "./pages/home";
+import DishList from "./pages/home/dish-list";
+import ScheduleList from "./pages/home/scheduled-list";
 
 const App = () => {
   const { snackBarState, handleSnackBarClose, setAuth0Token } = useHeader();
@@ -21,7 +24,11 @@ const App = () => {
       <Container>
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/client-votes" element={<ClientVotes />} />
+          <Route path="/home" element={<HomeImage />} />
+          <Route path="/home/dish-list" element={<DishList />} />
+          <Route path="/home/scheduled-list" element={<ScheduleList />} />
           <Route
             path="/company-reports"
             element={

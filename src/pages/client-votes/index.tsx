@@ -189,7 +189,7 @@ const ClientVotes = () => {
       {showSplash && <Splash />}
       {!showQuestion && (
         <StyledClientVotesView isMobile={isMobile}>
-          <Title text="Introduce tu código para continuar" type="xs" isMenu />
+          <Title text="Introduce el código para continuar" type="xs" isMenu />
           <StyledInputCodeContainer>
             <InputFieldCode setCode={setCodeInput} code={codeInput} />
           </StyledInputCodeContainer>

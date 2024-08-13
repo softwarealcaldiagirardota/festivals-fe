@@ -12,8 +12,8 @@ const Login = () => {
       navigate("/dashboard");
     if (isAuthenticated && !isLoading && user?.email !== "admin@festival.com")
       navigate("/company-reports");
-    // navigate("/client-votes");
   }, [isAuthenticated, isLoading, user]);
+
   if (!isAuthenticated && !isLoading)
     return <div>Inicia sesión para continuar</div>;
   return <Splash />;
