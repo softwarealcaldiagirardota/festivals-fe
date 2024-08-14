@@ -24,7 +24,8 @@ import NotExistCodeSplash from "../../components/NotExistCodeSplash";
 import InputFieldCode from "../../components/InputFieldCode";
 
 const ClientVotes = () => {
-  const { setTitle, isMobile, showSnackBar, online } = useHeader();
+  const { setTitle, isMobile, showSnackBar, online, loading, setLoading } =
+    useHeader();
   const [dataQuestions, setDataQuestions] = useState({} as Survey);
   const [dataCompany, setDataCompany] = useState({} as IClientVotes);
   const [notExistCode, setNotExistCode] = useState(false);
@@ -126,6 +127,7 @@ const ClientVotes = () => {
       });
       return;
     }
+    setLoading(true);
     const payload = Object.entries(ratings).map(([key, value]) => ({
       idQuestion: parseInt(key),
       idAnswer: value,
@@ -151,6 +153,8 @@ const ClientVotes = () => {
         message: messages.genericError,
         severity: "error",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -228,7 +232,7 @@ const ClientVotes = () => {
           })}
           <Button
             text={currentStep > 1 ? "Guardar calificación" : "Siguiente"}
-            canContinue={nextStep}
+            canContinue={loading ? false : nextStep}
             onClick={currentStep === 2 ? handleSubmit : handleCurrentStep}
           />
           {currentStep > 0 && (

@@ -12,7 +12,15 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const arrayNumber = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const Sales = () => {
-  const { setTitle, isMobile, online, showSnackBar, companyData } = useHeader();
+  const {
+    setTitle,
+    isMobile,
+    online,
+    showSnackBar,
+    companyData,
+    loading,
+    setLoading,
+  } = useHeader();
   const [value, setValue] = useState("");
   const { user } = useAuth0();
   const navigate = useNavigate();
@@ -20,7 +28,6 @@ const Sales = () => {
     const capital = `${user?.nickname
       ?.charAt(0)
       .toUpperCase()}${user?.nickname?.slice(1)}`;
-
     setTitle(`Ventas ${capital}`);
   }, [user]);
 
@@ -32,6 +39,7 @@ const Sales = () => {
       });
       return;
     }
+    setLoading(true);
     const payload = [
       {
         cant: parseInt(value),
@@ -66,6 +74,8 @@ const Sales = () => {
         message: messages.genericError,
         severity: "error",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -95,7 +105,7 @@ const Sales = () => {
       </StyledContainerSales>
       <Button
         onClick={handleSubmit}
-        canContinue={parseInt(value) > 0}
+        canContinue={loading ? false : parseInt(value) > 0}
         text="Enviar"
       />
       <Button

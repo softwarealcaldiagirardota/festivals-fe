@@ -33,6 +33,8 @@ interface HeaderContextType {
   setAuth0Token: React.Dispatch<React.SetStateAction<string>>;
   companyData: Item;
   setCompanyData: React.Dispatch<React.SetStateAction<Item>>;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
@@ -50,6 +52,7 @@ export const HeaderProvider = ({ children }: { children: ReactNode }) => {
   const [auth0Token, setAuth0Token] = useState<string>("");
   const showLoginButton = pathnamePermission.includes(window.location.pathname);
   const [companyData, setCompanyData] = useState<Item>({} as Item);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     window.addEventListener("online", function () {
@@ -89,6 +92,8 @@ export const HeaderProvider = ({ children }: { children: ReactNode }) => {
         setAuth0Token,
         companyData,
         setCompanyData,
+        loading,
+        setLoading,
       }}
     >
       {children}
