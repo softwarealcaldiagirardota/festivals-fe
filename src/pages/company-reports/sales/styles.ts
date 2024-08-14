@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { palette } from "../../../theme";
+import { Typography } from "@mui/material";
 
 const StyledContainerSales = styled("div")(() => ({
   display: "flex",
@@ -46,9 +47,17 @@ const StyledContainerSalesDetails = styled("div")(() => ({
   marginTop: "10px",
 }));
 
+const StyledNoCompanyInfo = styled(Typography)(() => ({
+  fontWeight: "400",
+  fontSize: "16px",
+  color: "red",
+  textAlign: "left" as const,
+}));
+
 export {
   StyledContainerSales,
   StyledContainerSalesDetails,
   Container,
   StyledNumberButton,
+  StyledNoCompanyInfo,
 };

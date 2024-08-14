@@ -20,30 +20,26 @@ const Header = () => {
 
   return (
     <>
-      {showLoginButton ||
-        (window.location.pathname === "/client-votes" && (
-          <StyledHeader>
-            {!isMobile && showLoginButton && (
-              <MenuIcon onClick={handleDrawerMenu} />
-            )}
-            <Title type="small" text={title} />
-            {isAuthenticated && (
-              <StatusLabel handleClick={() => logout()} value={"Logout"} />
-            )}
-            {!isAuthenticated && showLoginButton && (
-              <StatusLabel
-                handleClick={() => loginWithRedirect()}
-                value={"Login"}
-              />
-            )}
-            {title === "Verificar código" && !isAuthenticated && (
-              <StatusLabel
-                handleClick={() => navigate("home")}
-                value={"Home"}
-              />
-            )}
-          </StyledHeader>
-        ))}
+      {(showLoginButton || window.location.pathname === "/client-votes") && (
+        <StyledHeader>
+          {!isMobile && showLoginButton && (
+            <MenuIcon onClick={handleDrawerMenu} />
+          )}
+          <Title type="small" text={title} />
+          {isAuthenticated && (
+            <StatusLabel handleClick={() => logout()} value={"Logout"} />
+          )}
+          {!isAuthenticated && showLoginButton && (
+            <StatusLabel
+              handleClick={() => loginWithRedirect()}
+              value={"Login"}
+            />
+          )}
+          {title === "Verificar código" && !isAuthenticated && (
+            <StatusLabel handleClick={() => navigate("home")} value={"Home"} />
+          )}
+        </StyledHeader>
+      )}
     </>
   );
 };

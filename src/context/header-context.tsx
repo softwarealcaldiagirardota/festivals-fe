@@ -12,6 +12,7 @@ import { pathnamePermission } from "../utils/utils";
 interface ISnackBarState {
   open?: boolean;
   message?: string;
+  severity?: "error" | "success";
 }
 interface HeaderContextType {
   title: string;
@@ -19,7 +20,10 @@ interface HeaderContextType {
   openDrawerMenu: boolean;
   setOpenDrawerMenu: (openDrawerMenu: boolean) => void;
   isMobile?: boolean;
-  showSnackBar: (newState: ISnackBarState) => void;
+  showSnackBar: (
+    newState: ISnackBarState,
+    severity?: "error" | "success"
+  ) => void;
   snackBarState: ISnackBarState;
   handleSnackBarClose: () => void;
   online?: boolean;
@@ -38,6 +42,7 @@ export const HeaderProvider = ({ children }: { children: ReactNode }) => {
   const [snackBarState, setSnackBarState] = useState<ISnackBarState>({
     open: false,
     message: "",
+    severity: "error",
   });
   const [auth0Token, setAuth0Token] = useState<string>("");
   const showLoginButton = pathnamePermission.includes(window.location.pathname);

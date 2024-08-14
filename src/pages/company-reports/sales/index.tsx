@@ -6,21 +6,65 @@ import { StyledContainerSales, Container, StyledNumberButton } from "./styles";
 import Number from "../../../components/Number/index.tsx";
 import Button from "../../../components/Button/index.tsx";
 import Title from "../../../components/Title/index.tsx";
-import SalesReported from "../../../components/SalesReported/index.tsx";
 import { useNavigate } from "react-router-dom";
+import { messages, urlBase } from "../../../utils/utils.tsx";
 
 const arrayNumber = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const Sales = () => {
-  const { setTitle, isMobile } = useHeader();
+  const { setTitle, isMobile, online, showSnackBar } = useHeader();
   const [value, setValue] = useState("");
-  const [reported, setReported] = useState("");
   const navigate = useNavigate();
-
   useEffect(() => {
     setTitle("Registro de ventas");
   }, []);
 
-  const handleSumReported = () => setReported(value);
+  const handleSubmit = async () => {
+    if (!online) {
+      showSnackBar({
+        message: messages.internetError,
+        severity: "error",
+      });
+      return;
+    }
+    const payload = [
+      {
+        cant: parseInt(value),
+        idProduct: 1,
+      },
+    ];
+    try {
+      const res = await fetch(
+        `${urlBase}/CompanySale`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "id-festival": "2",
+            "id-company": "5",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+      const data = await res.json();
+      if (data?.state && data?.data) {
+        setValue("");
+        showSnackBar({
+          message: messages.saveSuccess,
+          severity: "success",
+        });
+        return;
+      }
+      showSnackBar({
+        message: messages.errorSavingSales,
+        severity: "error",
+      });
+    } catch (error) {
+      showSnackBar({
+        message: messages.genericError,
+        severity: "error",
+      });
+    }
+  };
 
   const handleClick = (value: string) =>
     setValue((prevValue) => prevValue.toString() + value.toString());
@@ -32,7 +76,6 @@ const Sales = () => {
   return (
     <Container isMobile={isMobile}>
       <BackArrow />
-      <SalesReported value={reported.toString()}isSalesReported={true} />
       <Number value={value?.length > 0 ? value : 0} />
       <StyledContainerSales>
         {arrayNumber.map((number) => (
@@ -46,7 +89,11 @@ const Sales = () => {
           <Title text="Borrar" type="small" />
         </StyledNumberButton>
       </StyledContainerSales>
-      <Button onClick={handleSumReported} canContinue={true} text="Enviar" />
+      <Button
+        onClick={handleSubmit}
+        canContinue={parseInt(value) > 0}
+        text="Enviar"
+      />
       <Button
         variant="outlined"
         text="Ver registros"

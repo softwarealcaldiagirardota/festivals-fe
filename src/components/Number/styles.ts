@@ -6,7 +6,7 @@ const StyledNumber = styled(Typography)(() => ({
   fontWeight: "400",
   fontSize: "32px",
   lineHeight: "42px",
-  letterSpacing: "3px",
+  letterSpacing: "1px",
   color: palette.primary.title,
   width: "100%",
   height: "40px",

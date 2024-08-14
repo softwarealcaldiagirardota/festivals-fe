@@ -106,7 +106,11 @@ const App = () => {
         autoHideDuration={5000}
         onClose={handleSnackBarClose}
       >
-        <Alert onClose={handleSnackBarClose} severity="error" variant="filled">
+        <Alert
+          onClose={handleSnackBarClose}
+          severity={snackBarState?.severity}
+          variant="filled"
+        >
           {snackBarState?.message}
         </Alert>
       </Snackbar>

@@ -39,6 +39,10 @@ export const messages = {
     "Se produjo un error obteniendo el nombre del comercio. Por favor, inténtalo de nuevo.",
   errorGettingQuestions:
     "Se produjo un error obteniendo las preguntas. Por favor, inténtalo de nuevo.",
+  errorGettingCompanyData:
+    "Error obteniendo los datos del participante. Por favor refresque e intente de nuevo",
+  errorSavingSales: "Error guardando la venta. Por favor intente de nuevo",
+  saveSuccess: "Registro guardado correctamente.",
 };
 
 export const validateCodeStructure = (code: string): boolean => {
@@ -119,3 +123,10 @@ export const pathnamePermission = [
   "/judge-votes",
   "/login",
 ];
+
+export const domain = "dev-t7qrzenx1neaggbp.us.auth0.com"; //import.meta.env.VITE_AUTH0_DOMAIN;
+export const clientId = "NxzOyJPPDsH8EklQOCJot9IcGpD7Gnso"; //import.meta.env.VITE_AUTH0_CLIENT_ID;
+export const audience = "https://ferias.girardotabackoffice.com";
+
+export const urlBase =
+  "https://festival-ms-girardota.us-east-1.elasticbeanstalk.com/api";

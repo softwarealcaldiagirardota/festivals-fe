@@ -15,6 +15,7 @@ import ConfirmationSplash from "../../components/ConfirmationSplash";
 import {
   getCodeUser,
   messages,
+  urlBase,
   validateCodeStructure,
 } from "../../utils/utils";
 import { useLocation } from "react-router-dom";
@@ -47,9 +48,7 @@ const ClientVotes = () => {
       const companyCode = codeInput
         ? getCodeUser(codeInput)
         : getCodeUser(code);
-      const response = await fetch(
-        `http://festival-ms-girardota.us-east-1.elasticbeanstalk.com/api/Company/code/${companyCode}`
-      );
+      const response = await fetch(`${urlBase}/Company/code/${companyCode}`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -68,6 +67,7 @@ const ClientVotes = () => {
       setShowSplash(false);
       showSnackBar({
         message: messages.errorGettingCompanyName,
+        severity: "error",
       });
     }
   };
@@ -75,7 +75,7 @@ const ClientVotes = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "http://festival-ms-girardota.us-east-1.elasticbeanstalk.com/api/Festival/2"
+        `${urlBase}/Festival/2`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -92,6 +92,7 @@ const ClientVotes = () => {
       setShowSplash(false);
       showSnackBar({
         message: messages.errorGettingQuestions,
+        severity: "error",
       });
     }
   };
@@ -123,6 +124,7 @@ const ClientVotes = () => {
     if (!online) {
       showSnackBar({
         message: messages.internetError,
+        severity: "error",
       });
       return;
     }
@@ -152,6 +154,7 @@ const ClientVotes = () => {
     } catch (error) {
       showSnackBar({
         message: messages.genericError,
+        severity: "error",
       });
     }
   };
