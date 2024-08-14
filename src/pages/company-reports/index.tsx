@@ -5,7 +5,6 @@ import logoAction1 from "../../assets/splash-2.png";
 import logoAction2 from "../../assets/splash-3.png";
 import { StyledContainerActions } from "./styles";
 import { useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const CompanyReports = () => {
   const { setTitle, isMobile } = useHeader();
