@@ -2,11 +2,20 @@ import { useEffect, useState } from "react";
 import { useHeader } from "../../../../context/header-context";
 import { Container, StyledContainerSalesDetails } from "../styles";
 import BackArrow from "../../../../components/BackArrow";
-
 import SalesDetail from "../../../../components/Actions copy";
 import { formatDateTime, messages, urlBase } from "../../../../utils/utils";
 import SalesReported from "../../../../components/SalesReported";
 import { Participation } from "../../../../utils/type";
+
+const convertDate = (dateString: string) => {
+  const date = new Date(dateString);
+  const userTimezoneDate = date.toLocaleString();
+  return `${formatDateTime(new Date(userTimezoneDate?.split(".")[0]))}`;
+};
+
+function sumCant(array: Participation[]) {
+  return array.reduce((total, item) => total + item.cant, 0);
+}
 
 const ReportsSalesDetails = () => {
   const { setTitle, isMobile, showSnackBar, companyData } = useHeader();
@@ -37,16 +46,15 @@ const ReportsSalesDetails = () => {
     if (companyData?.id) fetchSales(companyData?.id);
   }, [companyData?.id]);
 
-  const convertDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const userTimezoneDate = date.toLocaleString();
-    return `${formatDateTime(new Date(userTimezoneDate?.split(".")[0]))}`;
-  };
-
   return (
     <Container isMobile={isMobile}>
       <BackArrow />
-      {<SalesReported value="12" isSalesReported={true} />}
+      {
+        <SalesReported
+          value={sumCant(detailsData).toString()}
+          isSalesReported={true}
+        />
+      }
       <StyledContainerSalesDetails>
         {detailsData.map((detail) => (
           <SalesDetail
