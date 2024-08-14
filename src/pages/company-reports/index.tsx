@@ -7,8 +7,6 @@ import { StyledContainerActions } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
-
 const CompanyReports = () => {
   const { setTitle, isMobile } = useHeader();
   const navigate = useNavigate();
@@ -16,10 +14,11 @@ const CompanyReports = () => {
 
   useEffect(() => {
     if (user && user.nickname) {
-      const capital =  user.nickname.charAt(0).toUpperCase()  + user.nickname.slice(1);
+      const capital =
+        user.nickname.charAt(0).toUpperCase() + user.nickname.slice(1);
       setTitle(`Hola ${capital}`);
-    }else{
-      setTitle("Hola")
+    } else {
+      setTitle("Hola");
     }
   }, [user, setTitle]);
   return (

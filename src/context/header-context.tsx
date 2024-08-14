@@ -7,7 +7,8 @@ import {
   useEffect,
 } from "react";
 import { theme } from "../theme";
-import { pathnamePermission } from "../utils/utils";
+import { messages, pathnamePermission, urlBase } from "../utils/utils";
+import { Item } from "../utils/type";
 
 interface ISnackBarState {
   open?: boolean;
@@ -30,6 +31,8 @@ interface HeaderContextType {
   showLoginButton?: boolean;
   auth0Token?: string;
   setAuth0Token: React.Dispatch<React.SetStateAction<string>>;
+  companyData: Item;
+  setCompanyData: React.Dispatch<React.SetStateAction<Item>>;
 }
 
 const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
@@ -46,6 +49,7 @@ export const HeaderProvider = ({ children }: { children: ReactNode }) => {
   });
   const [auth0Token, setAuth0Token] = useState<string>("");
   const showLoginButton = pathnamePermission.includes(window.location.pathname);
+  const [companyData, setCompanyData] = useState<Item>({} as Item);
 
   useEffect(() => {
     window.addEventListener("online", function () {
@@ -83,6 +87,8 @@ export const HeaderProvider = ({ children }: { children: ReactNode }) => {
         showLoginButton,
         auth0Token,
         setAuth0Token,
+        companyData,
+        setCompanyData,
       }}
     >
       {children}

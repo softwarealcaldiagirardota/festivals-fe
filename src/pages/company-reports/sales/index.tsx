@@ -11,7 +11,7 @@ import { messages, urlBase } from "../../../utils/utils.tsx";
 
 const arrayNumber = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const Sales = () => {
-  const { setTitle, isMobile, online, showSnackBar } = useHeader();
+  const { setTitle, isMobile, online, showSnackBar, companyData } = useHeader();
   const [value, setValue] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
@@ -33,18 +33,15 @@ const Sales = () => {
       },
     ];
     try {
-      const res = await fetch(
-        `${urlBase}/CompanySale`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "id-festival": "2",
-            "id-company": "5",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const res = await fetch(`${urlBase}/CompanySale`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "id-festival": "2",
+          "id-company": `${companyData?.id}`,
+        },
+        body: JSON.stringify(payload),
+      });
       const data = await res.json();
       if (data?.state && data?.data) {
         setValue("");
@@ -80,6 +77,7 @@ const Sales = () => {
       <StyledContainerSales>
         {arrayNumber.map((number) => (
           <NumberButton
+            noData={!companyData?.id}
             key={number}
             onClick={handleClick.bind(null, number)}
             text={number}
@@ -98,7 +96,7 @@ const Sales = () => {
         variant="outlined"
         text="Ver registros"
         onClick={handleNavigate}
-        canContinue={true}
+        canContinue={companyData?.id > 0}
       />
     </Container>
   );

@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Splash from "./components/Splash";
+import { messages, urlBase } from "./utils/utils";
+import { useHeader } from "./context/header-context";
 
 interface PrivateRouteProps {
   children: JSX.Element;
@@ -12,15 +14,38 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
   children,
   setAuth0Token,
 }) => {
-  const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+  const { isAuthenticated, isLoading, getAccessTokenSilently, user } =
+    useAuth0();
+  const { setCompanyData } = useHeader();
   const getToken = async () => {
     const token = await getAccessTokenSilently();
     setAuth0Token(token || "");
   };
 
+  const fetchCompanyData = async (userAuth0Id: string) => {
+    try {
+      const response = await fetch(`${urlBase}/Company/user/${userAuth0Id}`);
+      if (!response.ok) {
+        throw new Error("Error obteniendo las company");
+      }
+      const data = await response.json();
+      if (data?.data && data?.state) {
+        setCompanyData(data?.data);
+        return;
+      }
+      throw new Error("Error obteniendo las company");
+    } catch (error) {
+      showSnackBar({
+        message: messages.errorGettingCompanyData,
+      });
+    }
+  };
+
   useEffect(() => {
     getToken();
-  }, []);
+    if (isAuthenticated && !isLoading && user?.sub)
+      fetchCompanyData(user?.sub?.split("|")[1] || "");
+  }, [isAuthenticated, isLoading, user]);
   if (isLoading) {
     return <Splash />;
   }
@@ -29,3 +54,6 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
 };
 
 export default PrivateRoute;
+function showSnackBar(arg0: { message: any }) {
+  throw new Error("Function not implemented.");
+}
