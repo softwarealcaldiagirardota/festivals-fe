@@ -10,17 +10,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 const CompanyReports = () => {
   const { setTitle, isMobile } = useHeader();
   const navigate = useNavigate();
-  const { user } = useAuth0();
 
   useEffect(() => {
-    if (user && user.nickname) {
-      const capital =
-        user.nickname.charAt(0).toUpperCase() + user.nickname.slice(1);
-      setTitle(`Hola ${capital}`);
-    } else {
-      setTitle("Hola");
-    }
-  }, [user, setTitle]);
+    setTitle("Hola");
+  }, [setTitle]);
   return (
     <StyledContainerActions isMobile={isMobile}>
       <Actions

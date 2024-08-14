@@ -22,7 +22,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           authorizationParams={{
             redirect_uri: `${window.location.origin}/login`,
             audience: audience,
-            scope: "read:users",
           }}
         >
           <BrowserRouter>

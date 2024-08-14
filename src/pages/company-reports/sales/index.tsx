@@ -8,15 +8,21 @@ import Button from "../../../components/Button/index.tsx";
 import Title from "../../../components/Title/index.tsx";
 import { useNavigate } from "react-router-dom";
 import { messages, urlBase } from "../../../utils/utils.tsx";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const arrayNumber = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const Sales = () => {
   const { setTitle, isMobile, online, showSnackBar, companyData } = useHeader();
   const [value, setValue] = useState("");
+  const { user } = useAuth0();
   const navigate = useNavigate();
   useEffect(() => {
-    setTitle("Registro de ventas");
-  }, []);
+    const capital = `${user?.nickname
+      ?.charAt(0)
+      .toUpperCase()}${user?.nickname?.slice(1)}`;
+
+    setTitle(`Ventas ${capital}`);
+  }, [user]);
 
   const handleSubmit = async () => {
     if (!online) {
