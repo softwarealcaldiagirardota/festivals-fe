@@ -128,5 +128,4 @@ export const domain = "dev-t7qrzenx1neaggbp.us.auth0.com"; //import.meta.env.VIT
 export const clientId = "NxzOyJPPDsH8EklQOCJot9IcGpD7Gnso"; //import.meta.env.VITE_AUTH0_CLIENT_ID;
 export const audience = "https://ferias.girardotabackoffice.com";
 
-export const urlBase =
-  "https://festival-ms-girardota.us-east-1.elasticbeanstalk.com/api";
+export const urlBase = "https://api.feriasgirardota.com/api";
