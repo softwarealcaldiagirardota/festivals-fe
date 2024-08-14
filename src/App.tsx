@@ -18,6 +18,7 @@ import DishList from "./pages/home/dish-list";
 import ScheduleList from "./pages/home/scheduled-list";
 import NotFound from "./pages/404";
 import Calm from "./pages/home/calm";
+import { palette } from "./theme";
 
 const App = () => {
   const { snackBarState, handleSnackBarClose, setAuth0Token } = useHeader();
@@ -110,6 +111,14 @@ const App = () => {
           onClose={handleSnackBarClose}
           severity={snackBarState?.severity}
           variant="filled"
+          sx={
+            snackBarState?.severity === "success"
+              ? {
+                  backgroundColor:
+                    palette.primary.backgroundBlueFestivalChicharron,
+                }
+              : { backgroundColor: "#red" }
+          }
         >
           {snackBarState?.message}
         </Alert>
