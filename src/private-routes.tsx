@@ -16,7 +16,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
 }) => {
   const { isAuthenticated, isLoading, getAccessTokenSilently, user } =
     useAuth0();
-  const { setCompanyData } = useHeader();
+  const { setCompanyData, showSnackBar } = useHeader();
   const getToken = async () => {
     const token = await getAccessTokenSilently();
     setAuth0Token(token || "");
@@ -54,6 +54,3 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
 };
 
 export default PrivateRoute;
-function showSnackBar(arg0: { message: any }) {
-  throw new Error("Function not implemented.");
-}

@@ -8,28 +8,6 @@ import { formatDateTime, messages, urlBase } from "../../../../utils/utils";
 import SalesReported from "../../../../components/SalesReported";
 import { Participation } from "../../../../utils/type";
 
-const salesDetail = [
-  {
-    id: "1",
-    value: 40,
-    date: `${formatDateTime(new Date())}`,
-  },
-  {
-    id: "2",
-    value: 100,
-    date: `${formatDateTime(new Date())}`,
-  },
-  {
-    id: "3",
-    value: 1500,
-    date: `${formatDateTime(new Date())}`,
-  },
-  {
-    id: "4",
-    value: 4000,
-    date: `${formatDateTime(new Date())}`,
-  },
-];
 const ReportsSalesDetails = () => {
   const { setTitle, isMobile, showSnackBar, companyData } = useHeader();
   const [detailsData, setDetailsData] = useState<Participation[]>([]);

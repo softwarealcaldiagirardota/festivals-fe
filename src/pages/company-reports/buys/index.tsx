@@ -9,7 +9,6 @@ import Title from "../../../components/Title/index.tsx";
 import SalesReported from "../../../components/SalesReported/index.tsx";
 import { useNavigate } from "react-router-dom";
 
-
 const arrayNumber = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const Buys = () => {
   const { setTitle, isMobile } = useHeader();
@@ -17,11 +16,9 @@ const Buys = () => {
   const [reported, setReported] = useState("");
   const navigate = useNavigate();
 
-
   useEffect(() => {
     setTitle("Registro de compras");
   }, []);
-
 
   const handleSumReported = () => setReported(value);
 
@@ -32,7 +29,6 @@ const Buys = () => {
 
   const handleNavigate = () => navigate("/company-reports/buys/detail");
 
-
   return (
     <Container isMobile={isMobile}>
       <BackArrow />
@@ -41,6 +37,7 @@ const Buys = () => {
       <StyledContainerSales>
         {arrayNumber.map((number) => (
           <NumberButton
+            noData={true}
             key={number}
             onClick={handleClick.bind(null, number)}
             text={number}
