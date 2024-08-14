@@ -74,9 +74,7 @@ const ClientVotes = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        `${urlBase}/Festival/2`
-      );
+      const response = await fetch(`${urlBase}/Festival/2`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -133,18 +131,15 @@ const ClientVotes = () => {
       idAnswer: value,
     }));
     try {
-      const res = await fetch(
-        "http://festival-ms-girardota.us-east-1.elasticbeanstalk.com/Vote",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            code: code || codeInput,
-            "id-festival": "2",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const res = await fetch(`https://api.feriasgirardota.com/Vote`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          code: code || codeInput,
+          "id-festival": "2",
+        },
+        body: JSON.stringify(payload),
+      });
       const data = await res.json();
       if (!data?.state && !data?.data) {
         setNotExistCode(true);
