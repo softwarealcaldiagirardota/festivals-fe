@@ -1,16 +1,20 @@
 import styled from "styled-components";
-import { palette } from "../../../../theme";
+import { colorsDashboard } from "../../../../utils/utils";
 
-const CircleSmall = styled.div`
-  width: 12px;
-  height: 12px;
-  background-color: ${palette.primary.statusLabel};
-  border-radius: 50%;
-  margin-right: 10px;
-`;
+interface CircleSmallProps {
+  randomNumber: number;
+}
 
-const CircleComponent = () => {
-  return <CircleSmall />;
+const CircleSmall = styled("div")<CircleSmallProps>(({ randomNumber }) => ({
+  width: "12px",
+  height: "12px",
+  backgroundColor: colorsDashboard[randomNumber],
+  borderRadius: "50%",
+  marginRight: "10px",
+}));
+
+const CircleComponent = ({ number }: { number: number }) => {
+  return <CircleSmall randomNumber={number} />;
 };
 
 export default CircleComponent;

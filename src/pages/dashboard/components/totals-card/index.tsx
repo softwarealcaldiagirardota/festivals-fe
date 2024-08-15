@@ -1,21 +1,30 @@
 import { palette } from "../../../../theme";
-import { formatter } from "../../../../utils/utils";
+import {
+  formatter,
+  totalSales2023,
+  totalSales2023Money,
+} from "../../../../utils/utils";
 import CircularProgressBar from "../circle";
 import Title from "../title";
 import { StyledCircle, StyledContainerTotalCards, StyledTexts } from "./styles";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 
-const totalSales2023 = 42949;
-const totalSales2023Money = 515388000;
 interface ITotalCards {
-  type: "sales" | "money" | "survey";
+  type: "sales" | "money" | "survey" | "salesday";
   total: number;
   text: string;
   percentage: number;
+  subtype?: string;
 }
 
-const TotalCards = ({ type, total, text, percentage }: ITotalCards) => {
+const TotalCards = ({
+  type,
+  total,
+  text,
+  percentage,
+  subtype,
+}: ITotalCards) => {
   const isMajorSales =
     type === "sales"
       ? total >= totalSales2023
@@ -57,9 +66,11 @@ const TotalCards = ({ type, total, text, percentage }: ITotalCards) => {
           />
         )}
       </StyledTexts>
-      <StyledCircle>
-        <CircularProgressBar percentage={percentage} />
-      </StyledCircle>
+      {subtype !== "day" && (
+        <StyledCircle>
+          <CircularProgressBar percentage={percentage} />
+        </StyledCircle>
+      )}
     </StyledContainerTotalCards>
   );
 };

@@ -146,3 +146,23 @@ export const orderArrayDesc = (array: Participation[]) =>
   array.sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
+
+export const totalSales2023 = 42949;
+export const totalSales2023Money = 515388000;
+export const currentPrice = 15000;
+
+export const colorsDashboard = [
+  "#501712",
+  "#F9EAD3",
+  "#BF1F1F",
+  "#FFA901",
+  "#0487D9",
+  "#3B3A30",
+  "#607D8B",
+  "#8C5340",
+  "#3F3F44",
+  "#4A4847",
+  "#2A4B7C",
+  "#A5A58D",
+  "#455A64"
+];

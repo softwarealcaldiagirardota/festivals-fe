@@ -53,7 +53,7 @@ const CircularProgressBar = ({
           color: palette.primary.main,
         }}
       >
-        {`+${percentage}%`}
+        {`${percentage}%`}
       </div>
     </div>
   );

@@ -48,7 +48,7 @@ const ReportsBuysDetails = () => {
       {
         <SalesReported
           value={sumCant(detailsData).toString()}
-          isSalesReported={true}
+          isSalesReported={false}
         />
       }
       <StyledContainerSalesDetails>

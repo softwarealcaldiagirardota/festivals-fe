@@ -1,11 +1,13 @@
 import { useHeader } from "../../../../context/header-context";
 import { formatter } from "../../../../utils/utils";
+import { SalesData } from "../../utils";
 import CircleComponent from "../circle-small/circleSmall";
 import ProgressBar from "../progress-bar";
 import Title from "../title";
 import {
   StyledContainer,
   StyledContainerItem,
+  StyledContainerItemDos,
   StyledContainerItemName,
   StyledContainerItemValue,
   StyledTitle,
@@ -15,223 +17,44 @@ const cutString = (text: string) => {
   return text.length > 10 ? `${text.substring(0, 10)}...` : text;
 };
 
-const CardsDetails = ({ text }: { text: string }) => {
+const CardsDetails = ({
+  text,
+  dashboardSalesDataList,
+}: {
+  text: string;
+  dashboardSalesDataList: SalesData[] | null;
+}) => {
   const { isMobile } = useHeader();
   return (
     <StyledContainer>
       <Title text={text} />
       <>
-        <StyledContainerItem>
-          <StyledContainerItemName>
-            <CircleComponent />
-            <StyledTitle>
-              {isMobile
-                ? cutString("Postrezote de chicharrón")
-                : "Postrezote de chicharrón"}
-            </StyledTitle>
-          </StyledContainerItemName>
-          <StyledContainerItemValue>
-            {isMobile ? null : <ProgressBar percentage={60} />}
-            <Title isNumberDetail={true} text={formatter.format(3022)} />
-          </StyledContainerItemValue>
-        </StyledContainerItem>
-
-        <StyledContainerItem>
-          <StyledContainerItemName>
-            <CircleComponent />
-            <StyledTitle>
-              {isMobile
-                ? cutString("Postrezote de chicharrón")
-                : "Postrezote de chicharrón"}
-            </StyledTitle>
-          </StyledContainerItemName>
-          <StyledContainerItemValue>
-            {isMobile ? null : <ProgressBar percentage={60} />}
-            <Title isNumberDetail={true} text={formatter.format(3022)} />
-          </StyledContainerItemValue>
-        </StyledContainerItem>
-        <StyledContainerItem>
-          <StyledContainerItemName>
-            <CircleComponent />
-            <StyledTitle>
-              {isMobile
-                ? cutString("Postrezote de chicharrón")
-                : "Postrezote de chicharrón"}
-            </StyledTitle>
-          </StyledContainerItemName>
-          <StyledContainerItemValue>
-            {isMobile ? null : <ProgressBar percentage={60} />}
-            <Title isNumberDetail={true} text={formatter.format(3022)} />
-          </StyledContainerItemValue>
-        </StyledContainerItem>
-        <StyledContainerItem>
-          <StyledContainerItemName>
-            <CircleComponent />
-            <StyledTitle>
-              {isMobile
-                ? cutString("Postrezote de chicharrón")
-                : "Postrezote de chicharrón"}
-            </StyledTitle>
-          </StyledContainerItemName>
-          <StyledContainerItemValue>
-            {isMobile ? null : <ProgressBar percentage={60} />}
-            <Title isNumberDetail={true} text={formatter.format(3022)} />
-          </StyledContainerItemValue>
-        </StyledContainerItem>
-        <StyledContainerItem>
-          <StyledContainerItemName>
-            <CircleComponent />
-            <StyledTitle>
-              {isMobile
-                ? cutString("Postrezote de chicharrón")
-                : "Postrezote de chicharrón"}
-            </StyledTitle>
-          </StyledContainerItemName>
-          <StyledContainerItemValue>
-            {isMobile ? null : <ProgressBar percentage={60} />}
-            <Title isNumberDetail={true} text={formatter.format(3022)} />
-          </StyledContainerItemValue>
-        </StyledContainerItem>
-        <StyledContainerItem>
-          <StyledContainerItemName>
-            <CircleComponent />
-            <StyledTitle>
-              {isMobile
-                ? cutString("Postrezote de chicharrón")
-                : "Postrezote de chicharrón"}
-            </StyledTitle>
-          </StyledContainerItemName>
-          <StyledContainerItemValue>
-            {isMobile ? null : <ProgressBar percentage={60} />}
-            <Title isNumberDetail={true} text={formatter.format(3022)} />
-          </StyledContainerItemValue>
-        </StyledContainerItem>
-        <StyledContainerItem>
-          <StyledContainerItemName>
-            <CircleComponent />
-            <StyledTitle>
-              {isMobile
-                ? cutString("Postrezote de chicharrón")
-                : "Postrezote de chicharrón"}
-            </StyledTitle>
-          </StyledContainerItemName>
-          <StyledContainerItemValue>
-            {isMobile ? null : <ProgressBar percentage={60} />}
-            <Title isNumberDetail={true} text={formatter.format(3022)} />
-          </StyledContainerItemValue>
-        </StyledContainerItem>
-        <StyledContainerItem>
-          <StyledContainerItemName>
-            <CircleComponent />
-            <StyledTitle>
-              {isMobile
-                ? cutString("Postrezote de chicharrón")
-                : "Postrezote de chicharrón"}
-            </StyledTitle>
-          </StyledContainerItemName>
-          <StyledContainerItemValue>
-            {isMobile ? null : <ProgressBar percentage={60} />}
-            <Title isNumberDetail={true} text={formatter.format(3022)} />
-          </StyledContainerItemValue>
-        </StyledContainerItem>
-        <StyledContainerItem>
-          <StyledContainerItemName>
-            <CircleComponent />
-            <StyledTitle>
-              {isMobile
-                ? cutString("Postrezote de chicharrón")
-                : "Postrezote de chicharrón"}
-            </StyledTitle>
-          </StyledContainerItemName>
-          <StyledContainerItemValue>
-            {isMobile ? null : <ProgressBar percentage={60} />}
-            <Title isNumberDetail={true} text={formatter.format(3022)} />
-          </StyledContainerItemValue>
-        </StyledContainerItem>
-        <StyledContainerItem>
-          <StyledContainerItemName>
-            <CircleComponent />
-            <StyledTitle>
-              {isMobile
-                ? cutString("Postrezote de chicharrón")
-                : "Postrezote de chicharrón"}
-            </StyledTitle>
-          </StyledContainerItemName>
-          <StyledContainerItemValue>
-            {isMobile ? null : <ProgressBar percentage={60} />}
-            <Title isNumberDetail={true} text={formatter.format(3022)} />
-          </StyledContainerItemValue>
-        </StyledContainerItem>
-        <StyledContainerItem>
-          <StyledContainerItemName>
-            <CircleComponent />
-            <StyledTitle>
-              {isMobile
-                ? cutString("Postrezote de chicharrón")
-                : "Postrezote de chicharrón"}
-            </StyledTitle>
-          </StyledContainerItemName>
-          <StyledContainerItemValue>
-            {isMobile ? null : <ProgressBar percentage={60} />}
-            <Title isNumberDetail={true} text={formatter.format(3022)} />
-          </StyledContainerItemValue>
-        </StyledContainerItem>
-        <StyledContainerItem>
-          <StyledContainerItemName>
-            <CircleComponent />
-            <StyledTitle>
-              {isMobile
-                ? cutString("Postrezote de chicharrón")
-                : "Postrezote de chicharrón"}
-            </StyledTitle>
-          </StyledContainerItemName>
-          <StyledContainerItemValue>
-            {isMobile ? null : <ProgressBar percentage={60} />}
-            <Title isNumberDetail={true} text={formatter.format(3022)} />
-          </StyledContainerItemValue>
-        </StyledContainerItem>
-        <StyledContainerItem>
-          <StyledContainerItemName>
-            <CircleComponent />
-            <StyledTitle>
-              {isMobile
-                ? cutString("Postrezote de chicharrón")
-                : "Postrezote de chicharrón"}
-            </StyledTitle>
-          </StyledContainerItemName>
-          <StyledContainerItemValue>
-            {isMobile ? null : <ProgressBar percentage={60} />}
-            <Title isNumberDetail={true} text={formatter.format(3022)} />
-          </StyledContainerItemValue>
-        </StyledContainerItem>
-        <StyledContainerItem>
-          <StyledContainerItemName>
-            <CircleComponent />
-            <StyledTitle>
-              {isMobile
-                ? cutString("Postrezote de chicharrón")
-                : "Postrezote de chicharrón"}
-            </StyledTitle>
-          </StyledContainerItemName>
-          <StyledContainerItemValue>
-            {isMobile ? null : <ProgressBar percentage={60} />}
-            <Title isNumberDetail={true} text={formatter.format(3022)} />
-          </StyledContainerItemValue>
-        </StyledContainerItem>
-        <StyledContainerItem>
-          <StyledContainerItemName>
-            <CircleComponent />
-            <StyledTitle>
-              {isMobile
-                ? cutString("Postrezote de chicharrón")
-                : "Postrezote de chicharrón"}
-            </StyledTitle>
-          </StyledContainerItemName>
-          <StyledContainerItemValue>
-            {isMobile ? null : <ProgressBar percentage={60} />}
-            <Title isNumberDetail={true} text={formatter.format(3022)} />
-          </StyledContainerItemValue>
-        </StyledContainerItem>
+        {dashboardSalesDataList &&
+          dashboardSalesDataList
+            .sort((a, b) => b.total_sales - a.total_sales)
+            .map((item, index) => (
+              <StyledContainerItem key={index + 1}>
+                <StyledContainerItemDos>
+                  <StyledContainerItemName>
+                    <CircleComponent number={item?.company_id - 1} />
+                    <StyledTitle>
+                      {cutString(item?.company_description)}
+                    </StyledTitle>
+                  </StyledContainerItemName>
+                  <StyledContainerItemValue>
+                    <ProgressBar percentage={item?.sales_percentage} />
+                    <Title
+                      isNumberDetail={true}
+                      text={formatter.format(item?.total_sales)}
+                    />
+                    <Title
+                      isNumberDetail={true}
+                      text={`$${formatter.format(item?.sales_in_money)}`}
+                    />
+                  </StyledContainerItemValue>
+                </StyledContainerItemDos>
+              </StyledContainerItem>
+            ))}
       </>
     </StyledContainer>
   );

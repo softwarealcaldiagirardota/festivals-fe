@@ -7,7 +7,7 @@ const ProgressContainer = styled.div`
 
 const ProgressBarWrapper = styled.div`
   position: relative;
-  width: 100px;
+  width: 60px;
   height: 10px;
   background-color: #f3f3f3;
   border-radius: 5px;
