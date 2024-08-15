@@ -20,11 +20,11 @@ const CompanyReports = () => {
         text="Ventas"
         logo={logoAction1}
       />
-      <Actions
+      {/* <Actions
         onClick={() => navigate("/company-reports/buys")}
         text="Compras"
         logo={logoAction2}
-      />
+      /> */}
     </StyledContainerActions>
   );
 };

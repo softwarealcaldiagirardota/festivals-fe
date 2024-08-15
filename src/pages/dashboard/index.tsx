@@ -46,7 +46,12 @@ const Dashboard = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `${urlBase}/CompanySale/companySalesTotalByDate`
+        `${urlBase}/CompanySale/companySalesTotalByDate`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("tokenUser")}`,
+          },
+        }
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");

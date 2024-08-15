@@ -20,12 +20,16 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
   const { setCompanyData, showSnackBar } = useHeader();
   const getToken = async () => {
     const token = await getAccessTokenSilently();
-    setAuth0Token(token || "");
+    localStorage.setItem("tokenUser", token);
   };
 
   const fetchCompanyData = async (userAuth0Id: string) => {
     try {
-      const response = await fetch(`${urlBase}/Company/user/${userAuth0Id}`);
+      const response = await fetch(`${urlBase}/Company/user/${userAuth0Id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("tokenUser")}`,
+        },
+      });
       if (!response.ok) {
         throw new Error("Error obteniendo las company");
       }

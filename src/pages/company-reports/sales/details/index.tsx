@@ -22,6 +22,7 @@ const ReportsSalesDetails = () => {
       const response = await fetch(`${urlBase}/CompanySale/${CompanyId}`, {
         headers: {
           "id-festival": "2",
+          Authorization: `Bearer ${localStorage.getItem("tokenUser")}`,
         },
       });
       if (!response.ok) {

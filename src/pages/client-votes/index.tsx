@@ -139,6 +139,7 @@ const ClientVotes = () => {
           "Content-Type": "application/json",
           code: code || codeInput,
           "id-festival": "2",
+          Authorization: `Bearer ${localStorage.getItem("tokenUser")}`,
         },
         body: JSON.stringify(payload),
       });

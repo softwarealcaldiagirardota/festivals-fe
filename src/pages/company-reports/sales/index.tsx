@@ -53,6 +53,7 @@ const Sales = () => {
           "Content-Type": "application/json",
           "id-festival": "2",
           "id-company": `${companyData?.id}`,
+          Authorization: `Bearer ${localStorage.getItem("tokenUser")}`,
         },
         body: JSON.stringify(payload),
       });
