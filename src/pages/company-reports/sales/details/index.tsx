@@ -3,19 +3,15 @@ import { useHeader } from "../../../../context/header-context";
 import { Container, StyledContainerSalesDetails } from "../styles";
 import BackArrow from "../../../../components/BackArrow";
 import SalesDetail from "../../../../components/Actions copy";
-import { formatDateTime, messages, urlBase } from "../../../../utils/utils";
+import {
+  formatDateTime,
+  messages,
+  orderArrayDesc,
+  sumCant,
+  urlBase,
+} from "../../../../utils/utils";
 import SalesReported from "../../../../components/SalesReported";
 import { Participation } from "../../../../utils/type";
-
-const convertDate = (dateString: string) => {
-  const date = new Date(dateString);
-  const userTimezoneDate = date.toLocaleString();
-  return `${formatDateTime(new Date(userTimezoneDate?.split(".")[0]))}`;
-};
-
-function sumCant(array: Participation[]) {
-  return array.reduce((total, item) => total + item.cant, 0);
-}
 
 const ReportsSalesDetails = () => {
   const { setTitle, isMobile, showSnackBar, companyData } = useHeader();
@@ -56,11 +52,11 @@ const ReportsSalesDetails = () => {
         />
       }
       <StyledContainerSalesDetails>
-        {detailsData.map((detail) => (
+        {orderArrayDesc(detailsData).map((detail) => (
           <SalesDetail
             key={detail.id}
             text={detail.cant}
-            date={convertDate(detail.createdAt)}
+            date={formatDateTime(new Date(detail.createdAt))}
             isSales={true}
           />
         ))}

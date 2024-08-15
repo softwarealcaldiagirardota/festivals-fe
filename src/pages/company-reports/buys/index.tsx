@@ -1,59 +1,117 @@
 import { useEffect, useState } from "react";
 import BackArrow from "../../../components/BackArrow";
 import { useHeader } from "../../../context/header-context";
-import NumberButton from "../../../components/NumberButton";
-import { StyledContainerSales, Container, StyledNumberButton } from "./styles";
-import Number from "../../../components/Number/index.tsx";
+import { Container } from "./styles";
 import Button from "../../../components/Button/index.tsx";
 import Title from "../../../components/Title/index.tsx";
-import SalesReported from "../../../components/SalesReported/index.tsx";
 import { useNavigate } from "react-router-dom";
+import {
+  StyledClientVotesView,
+  StyledInputCodeContainer,
+} from "../../client-votes/styles.ts";
+import { TextField } from "@mui/material";
+import { messages, urlBase } from "../../../utils/utils.tsx";
 
-const arrayNumber = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const Buys = () => {
-  const { setTitle, isMobile } = useHeader();
+  const { setTitle, isMobile, companyData, online, showSnackBar } = useHeader();
   const [value, setValue] = useState("");
-  const [reported, setReported] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     setTitle("Registro de compras");
   }, []);
 
-  const handleSumReported = () => setReported(value);
-
-  const handleClick = (value: string) =>
-    setValue((prevValue) => prevValue.toString() + value.toString());
-
   const handleDeleteValues = () => setValue("");
 
   const handleNavigate = () => navigate("/company-reports/buys/detail");
 
+  const handleSubmit = async () => {
+    if (!online) {
+      showSnackBar({
+        message: messages.internetError,
+        severity: "error",
+      });
+      return;
+    }
+    setLoading(true);
+    const payload = [
+      {
+        cant: parseInt(value),
+        idProduct: 1,
+      },
+    ];
+    try {
+      const res = await fetch(`${urlBase}/CompanyBuys`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "id-festival": "2",
+          "id-company": `${companyData?.id}`,
+        },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (data?.state && data?.data) {
+        setValue("");
+        showSnackBar({
+          message: messages.saveSuccess,
+          severity: "success",
+        });
+        return;
+      }
+      showSnackBar({
+        message: messages.errorSavingBuys,
+        severity: "error",
+      });
+    } catch (error) {
+      showSnackBar({
+        message: messages.genericError,
+        severity: "error",
+      });
+    } finally {
+      setLoading(false);
+      handleDeleteValues();
+    }
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setValue(value);
+  };
+
   return (
     <Container isMobile={isMobile}>
       <BackArrow />
-      <SalesReported value={reported.toString()} isSalesReported={false} />
-      <Number value={value?.length > 0 ? value : 0} />
-      <StyledContainerSales>
-        {arrayNumber.map((number) => (
-          <NumberButton
-            noData={true}
-            key={number}
-            onClick={handleClick.bind(null, number)}
-            text={number}
+      <StyledClientVotesView isMobile={isMobile}>
+        <Title
+          text="Introduce la cantidad de kilos comprados"
+          type="xs"
+          isMenu
+        />
+        <StyledInputCodeContainer>
+          <TextField
+            value={value}
+            label="Cantidad"
+            variant="outlined"
+            fullWidth
+            type="number"
+            disabled={companyData?.id === 0 || !companyData?.id}
+            onChange={handleInputChange}
           />
-        ))}
-        <StyledNumberButton onClick={handleDeleteValues}>
-          <Title text="Borrar" type="small" />
-        </StyledNumberButton>
-      </StyledContainerSales>
-      <Button onClick={handleSumReported} canContinue={true} text="Enviar" />
-      <Button
-        variant="outlined"
-        text="Ver registros"
-        onClick={handleNavigate}
-        canContinue={true}
-      />
+        </StyledInputCodeContainer>
+        <Button
+          text="Enviar"
+          canContinue={loading ? false : parseInt(value) > 0}
+          onClick={handleSubmit}
+        />
+        <Button
+          variant="outlined"
+          text="Ver registros"
+          onClick={handleNavigate}
+          canContinue={companyData?.id > 0}
+        />
+      </StyledClientVotesView>
     </Container>
   );
 };

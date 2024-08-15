@@ -1,5 +1,6 @@
 import { AddBusiness, HowToVote, Poll } from "@mui/icons-material";
 import { palette } from "../theme";
+import { Participation } from "./type";
 
 const colorIcon = palette.neutral.B;
 const fontSize = "18px";
@@ -43,6 +44,7 @@ export const messages = {
     "Error obteniendo los datos del participante. Por favor refresque e intente de nuevo",
   errorSavingSales: "Error guardando la venta. Por favor intente de nuevo",
   saveSuccess: "Registro guardado correctamente.",
+  errorSavingBuys: "Error guardando la compra. Por favor intente de nuevo",
 };
 
 export const validateCodeStructure = (code: string): boolean => {
@@ -129,3 +131,18 @@ export const clientId = "NxzOyJPPDsH8EklQOCJot9IcGpD7Gnso"; //import.meta.env.VI
 export const audience = "https://ferias.girardotabackoffice.com";
 
 export const urlBase = "https://api.feriasgirardota.com/api";
+
+export const convertDate = (dateString: string) => {
+  const date = new Date(dateString);
+  const userTimezoneDate = date.toLocaleString();
+  return `${formatDateTime(new Date(userTimezoneDate?.split(".")[0]))}`;
+};
+
+export const sumCant = (array: Participation[]) => {
+  return array.reduce((total, item) => total + item.cant, 0);
+};
+
+export const orderArrayDesc = (array: Participation[]) =>
+  array.sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );

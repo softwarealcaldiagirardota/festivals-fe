@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Splash from "./components/Splash";
 import { messages, urlBase } from "./utils/utils";
@@ -16,6 +16,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
 }) => {
   const { isAuthenticated, isLoading, getAccessTokenSilently, user } =
     useAuth0();
+  const navigate = useNavigate();
   const { setCompanyData, showSnackBar } = useHeader();
   const getToken = async () => {
     const token = await getAccessTokenSilently();
@@ -43,8 +44,11 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
 
   useEffect(() => {
     getToken();
-    if (isAuthenticated && !isLoading && user?.sub)
+    if (isAuthenticated && !isLoading && user?.sub) {
       fetchCompanyData(user?.sub?.split("|")[1] || "");
+    } else {
+      navigate("/login");
+    }
   }, [isAuthenticated, isLoading, user]);
   if (isLoading) {
     return <Splash />;
