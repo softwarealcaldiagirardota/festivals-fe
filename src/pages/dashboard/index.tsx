@@ -84,7 +84,6 @@ const Dashboard = () => {
       setDashboardSalesDataList(processSalesData(dashboardSalesData));
     }
     if (dashboardSalesData) {
-      console.log(processSalesData(dashboardSalesData));
       setDashboardSalesDataListDay(processSalesDataDay(dashboardSalesData));
     }
   }, [dashboardSalesData]);
