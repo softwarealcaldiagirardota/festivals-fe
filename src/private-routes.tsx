@@ -10,10 +10,7 @@ interface PrivateRouteProps {
   setAuth0Token: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({
-  children,
-  setAuth0Token,
-}) => {
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const { isAuthenticated, isLoading, getAccessTokenSilently, user } =
     useAuth0();
   const navigate = useNavigate();
