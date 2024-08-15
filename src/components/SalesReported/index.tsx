@@ -1,23 +1,41 @@
 import { formatter, KG, UNIDADES } from "../../utils/utils";
-import { StyledBackArrowText, StyledSalesReported } from "./styles";
+import {
+  StyledBackArrowText,
+  StyledSalesReported,
+  StyledSalesReportedSubtitle,
+} from "./styles";
 
 interface ISalesReported {
   value: string;
   isSalesReported?: boolean;
+  isTitle?: boolean;
 }
 
-// ... resto del código
+const SalesReported = ({
+  value,
+  isSalesReported = false,
+  isTitle,
+}: ISalesReported) => {
+  if (isTitle)
+    return (
+      <StyledSalesReportedSubtitle>
+        <div>Total del día:</div>
+        <div>{`${formatter.format(Number(value))} ${
+          isSalesReported ? UNIDADES : KG
+        }`}</div>
+      </StyledSalesReportedSubtitle>
+    );
 
-const SalesReported = ({ value, isSalesReported = false }: ISalesReported) => {
   return (
     <StyledSalesReported>
       <StyledBackArrowText>Total reportado: </StyledBackArrowText>
       <StyledBackArrowText>
-        {`${formatter.format(Number(value))} ${isSalesReported ? UNIDADES : KG}`}
+        {`${formatter.format(Number(value))} ${
+          isSalesReported ? UNIDADES : KG
+        }`}
       </StyledBackArrowText>
     </StyledSalesReported>
   );
 };
-
 
 export default SalesReported;

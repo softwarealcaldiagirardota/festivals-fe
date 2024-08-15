@@ -9,7 +9,17 @@ const StyledSalesReported = styled("div")(() => ({
   alignItems: "center",
   width: "100%",
   height: "30px",
-  margin: "10px 0 20px 0",
+  margin: "10px 0 10px 0",
+}));
+
+const StyledSalesReportedSubtitle = styled("div")(() => ({
+  position: "relative" as const,
+  display: "flex",
+  justifyContent: "space-between" as const,
+  alignItems: "center",
+  width: "100%",
+  height: "30px",
+  margin: "0 0 16px 0",
 }));
 
 const StyledBackArrowText = styled(Typography)(() => ({
@@ -20,4 +30,8 @@ const StyledBackArrowText = styled(Typography)(() => ({
   color: palette.primary.title,
 }));
 
-export { StyledSalesReported, StyledBackArrowText };
+export {
+  StyledSalesReported,
+  StyledBackArrowText,
+  StyledSalesReportedSubtitle,
+};

@@ -8,6 +8,7 @@ import {
   messages,
   orderArrayDesc,
   sumCant,
+  sumCantDay,
   urlBase,
 } from "../../../../utils/utils";
 import SalesReported from "../../../../components/SalesReported";
@@ -46,12 +47,15 @@ const ReportsSalesDetails = () => {
   return (
     <Container isMobile={isMobile}>
       <BackArrow />
-      {
-        <SalesReported
-          value={sumCant(detailsData).toString()}
-          isSalesReported={true}
-        />
-      }
+      <SalesReported
+        value={sumCant(detailsData).toString()}
+        isSalesReported={true}
+      />
+      <SalesReported
+        isTitle={true}
+        value={sumCantDay(detailsData).toString()}
+        isSalesReported={true}
+      />
       <StyledContainerSalesDetails>
         {orderArrayDesc(detailsData).map((detail) => (
           <SalesDetail

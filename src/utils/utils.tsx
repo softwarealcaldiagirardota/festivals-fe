@@ -142,6 +142,13 @@ export const sumCant = (array: Participation[]) => {
   return array.reduce((total, item) => total + item.cant, 0);
 };
 
+export const sumCantDay = (array: Participation[]) => {
+  const today = new Date().toISOString().split("T")[0];
+  return array
+    .filter((item) => item.createdAt.split("T")[0] === today)
+    .reduce((total, item) => total + item.cant, 0);
+};
+
 export const orderArrayDesc = (array: Participation[]) =>
   array.sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -164,5 +171,5 @@ export const colorsDashboard = [
   "#4A4847",
   "#2A4B7C",
   "#A5A58D",
-  "#455A64"
+  "#455A64",
 ];
