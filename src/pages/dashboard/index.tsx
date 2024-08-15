@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHeader } from "../../context/header-context";
-import { Container, ContainerDash } from "./styles";
+import { ContainerDash } from "./styles";
 import { Box, Grid } from "@mui/material";
 import TotalCards from "./components/totals-card";
 import CardsDetails from "./components/cards-details";
@@ -18,6 +18,7 @@ import {
   processSalesData,
   processSalesDataDay,
 } from "./utils";
+import Button from "../../components/Button";
 
 const Dashboard = () => {
   const { setTitle, showSnackBar } = useHeader();
@@ -29,6 +30,7 @@ const Dashboard = () => {
   const [dashboardSalesDataListDay, setDashboardSalesDataListDay] = useState<
     SalesData[] | null
   >(null);
+  const [loading, setLoading] = useState(true);
 
   const { user } = useAuth0();
   useEffect(() => {
@@ -42,6 +44,7 @@ const Dashboard = () => {
 
   const fetchDashboardSalesData = async () => {
     try {
+      setLoading(true);
       const response = await fetch(
         `${urlBase}/CompanySale/companySalesTotalByDate`
       );
@@ -60,6 +63,8 @@ const Dashboard = () => {
         message: messages.genericError,
         severity: "error",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -88,6 +93,8 @@ const Dashboard = () => {
     }
   }, [dashboardSalesData]);
 
+  const handleRefresh = () => fetchDashboardSalesData();
+
   return (
     <ContainerDash>
       {showSplash && <Splash />}
@@ -107,6 +114,14 @@ const Dashboard = () => {
       )}
       {user?.email === "admin@festival.com" && dashboardSalesData && (
         <Grid container spacing={4}>
+          <Grid item xs={12} lg={6}>
+            <Button
+              variant="outlined"
+              text="Refrescar"
+              onClick={handleRefresh}
+              canContinue={!loading}
+            />
+          </Grid>
           <Grid item xs={12} lg={3}>
             <TotalCards
               percentage={getSalesPercentage(dashboardSalesData)}
@@ -151,16 +166,22 @@ const Dashboard = () => {
           </Grid>
           {dashboardSalesDataList && (
             <>
-              <Grid item xs={12} lg={4}>
+              <Grid item xs={12} lg={6}>
                 <CardsDetails
                   dashboardSalesDataList={dashboardSalesDataList}
                   text="Ventas participantes"
                 />
               </Grid>
-              <Grid item xs={12} lg={4}>
+              <Grid item xs={12} lg={6}>
                 <CardsDetails
                   dashboardSalesDataList={dashboardSalesDataListDay}
                   text="Ventas participantes por día"
+                />
+              </Grid>
+              <Grid item xs={12} lg={6}>
+                <CardsDetails
+                  dashboardSalesDataList={dashboardSalesDataListDay}
+                  text="DATOS FAKE"
                 />
               </Grid>
             </>

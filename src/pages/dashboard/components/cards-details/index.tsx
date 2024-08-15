@@ -1,4 +1,3 @@
-import { useHeader } from "../../../../context/header-context";
 import { formatter } from "../../../../utils/utils";
 import { SalesData } from "../../utils";
 import CircleComponent from "../circle-small/circleSmall";
@@ -24,7 +23,6 @@ const CardsDetails = ({
   text: string;
   dashboardSalesDataList: SalesData[] | null;
 }) => {
-  const { isMobile } = useHeader();
   return (
     <StyledContainer>
       <Title text={text} />
