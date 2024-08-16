@@ -44,14 +44,14 @@ export const getDailySalesInMoney = (data: SalesData[]) => {
 export const getSalesPercentage = (data: SalesData[]) => {
   const totalSales = getTotalSales(data);
   const percentage = (totalSales / totalSales2023) * 100;
-  return parseFloat(percentage.toFixed(2));
+  return parseFloat(percentage?.toFixed(2));
 };
 
 // 6. Función que calcula el porcentaje del total de ventas en pesos respecto a totalSales2023Money
 export const getSalesMoneyPercentage = (data: SalesData[]) => {
   const totalSalesInMoney = getTotalSalesInMoney(data);
   const percentage = (totalSalesInMoney / totalSales2023Money) * 100;
-  return parseFloat(percentage.toFixed(2));
+  return parseFloat(percentage?.toFixed(2));
 };
 
 export const processSalesData = (salesData: any): SalesData[] => {
@@ -88,8 +88,8 @@ export const processSalesData = (salesData: any): SalesData[] => {
     return {
       ...item,
       sales_in_money: salesInMoney,
-      sales_percentage: parseFloat(salesPercentage.toFixed(2)),
-      sales_money_percentage: parseFloat(salesMoneyPercentage.toFixed(2)),
+      sales_percentage: parseFloat(salesPercentage?.toFixed(2)),
+      sales_money_percentage: parseFloat(salesMoneyPercentage?.toFixed(2)),
     };
   });
 };
@@ -128,12 +128,76 @@ export const processSalesDataDay = (data: SalesData[]): SalesData[] => {
     company.sales_percentage = (
       (company.total_sales / totalSalesToday) *
       100
-    ).toFixed(2);
+    )?.toFixed(2);
     company.sales_money_percentage = (
       (company.sales_in_money / totalSalesMoneyToday) *
       100
-    ).toFixed(2);
+    )?.toFixed(2);
   });
 
   return Object.values(groupedData);
 };
+
+export const sumTotalVotes = (companies: any) => {
+  return companies.reduce(
+    (total: any, company: any) => total + company.total_votes,
+    0
+  );
+};
+
+export function mergeArraysByCompanyId(votesArray: any, ratingsArray: any) {
+  const mergedArray: any = [];
+
+  // Crear un mapa para facilitar la combinación
+  const votesMap = new Map();
+  const ratingsMap = new Map();
+
+  // Poblar el mapa con los elementos de votesArray
+  votesArray.forEach((vote: any) => {
+    votesMap.set(vote.company_id, vote);
+  });
+
+  // Poblar el mapa con los elementos de ratingsArray
+  ratingsArray.forEach((rating: any) => {
+    ratingsMap.set(rating.company_id, rating);
+  });
+
+  // Calcular la sumatoria de total_votes
+  const totalVotesSum = votesArray.reduce(
+    (sum: any, vote: any) => sum + vote.total_votes,
+    0
+  );
+
+  // Combinar ambos mapas en un solo array
+  votesMap.forEach((vote, companyId) => {
+    const rating = ratingsMap.get(companyId);
+    const votePercentage: any =
+      totalVotesSum > 0
+        ? ((vote.total_votes / totalVotesSum) * 100)?.toFixed(2)
+        : 0;
+    const mergedObject = {
+      company_id: companyId,
+      company_description: vote.company_description,
+      total_votes: vote.total_votes,
+      overall_average_rating: rating ? rating.overall_average_rating : null,
+      vote_percentage: parseFloat(votePercentage),
+    };
+    mergedArray.push(mergedObject);
+  });
+
+  // Agregar cualquier elemento de ratingsArray que no esté en votesArray
+  ratingsMap.forEach((rating, companyId) => {
+    if (!votesMap.has(companyId)) {
+      const mergedObject = {
+        company_id: companyId,
+        company_description: rating.company_description,
+        total_votes: 0,
+        overall_average_rating: rating.overall_average_rating,
+        vote_percentage: 0,
+      };
+      mergedArray.push(mergedObject);
+    }
+  });
+
+  return mergedArray;
+}

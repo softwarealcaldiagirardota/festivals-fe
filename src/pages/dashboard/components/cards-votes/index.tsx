@@ -1,5 +1,4 @@
 import { formatter } from "../../../../utils/utils";
-import { SalesData } from "../../utils";
 import CircleComponent from "../circle-small/circleSmall";
 import ProgressBar from "../progress-bar";
 import Title from "../title";
@@ -10,18 +9,18 @@ import {
   StyledContainerItemName,
   StyledContainerItemValue,
   StyledTitle,
-} from "./styles";
+} from "../cards-details/styles";
 
 const cutString = (text: string) => {
   return text.length > 10 ? `${text.substring(0, 10)}...` : text;
 };
 
-const CardsDetails = ({
+const CardsVotes = ({
   text,
   dashboardSalesDataList,
 }: {
   text: string;
-  dashboardSalesDataList: SalesData[] | null;
+  dashboardSalesDataList: any[] | null;
 }) => {
   return (
     <StyledContainer>
@@ -33,15 +32,15 @@ const CardsDetails = ({
               <div>Participante</div>
             </StyledContainerItemName>
             <StyledContainerItemValue>
-              <div>Porcentaje / total ventas</div>
-              <div>Platos vendidos</div>
-              <div>Valor</div>
+              <div>Porcentaje / total votos</div>
+              <div>Total votos</div>
+              <div>Calificación</div>
             </StyledContainerItemValue>
           </StyledContainerItemDos>
         </StyledContainerItem>
         {dashboardSalesDataList &&
           dashboardSalesDataList
-            .sort((a, b) => b.total_sales - a.total_sales)
+            .sort((a, b) => b.overall_average_rating - a.overall_average_rating)
             .map((item, index) => (
               <StyledContainerItem key={index + 1}>
                 <StyledContainerItemDos>
@@ -52,14 +51,14 @@ const CardsDetails = ({
                     </StyledTitle>
                   </StyledContainerItemName>
                   <StyledContainerItemValue>
-                    <ProgressBar percentage={item?.sales_percentage} />
+                    <ProgressBar percentage={item?.vote_percentage} />
                     <Title
                       isNumberDetail={true}
-                      text={formatter.format(item?.total_sales)}
+                      text={formatter.format(item?.total_votes)}
                     />
                     <Title
                       isNumberDetail={true}
-                      text={`$${formatter.format(item?.sales_in_money)}`}
+                      text={item?.overall_average_rating?.toFixed(2)}
                     />
                   </StyledContainerItemValue>
                 </StyledContainerItemDos>
@@ -70,4 +69,4 @@ const CardsDetails = ({
   );
 };
 
-export default CardsDetails;
+export default CardsVotes;

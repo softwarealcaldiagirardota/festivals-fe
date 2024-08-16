@@ -6,7 +6,7 @@ import TotalCards from "./components/totals-card";
 import CardsDetails from "./components/cards-details";
 import { useAuth0 } from "@auth0/auth0-react";
 import Splash from "../../components/Splash";
-import { messages, urlBase } from "../../utils/utils";
+import { dominioBase, messages, urlBase } from "../../utils/utils";
 import {
   SalesData,
   getDailySales,
@@ -15,10 +15,13 @@ import {
   getSalesPercentage,
   getTotalSales,
   getTotalSalesInMoney,
+  mergeArraysByCompanyId,
   processSalesData,
   processSalesDataDay,
+  sumTotalVotes,
 } from "./utils";
 import Button from "../../components/Button";
+import CardsVotes from "./components/cards-votes";
 
 const Dashboard = () => {
   const { setTitle, showSnackBar } = useHeader();
@@ -27,6 +30,11 @@ const Dashboard = () => {
   const [dashboardSalesDataList, setDashboardSalesDataList] = useState<
     SalesData[] | null
   >(null);
+  const [restOfData, setRestOfData] = useState({
+    totalVotesByCompany: [],
+    avgByAnswer: [],
+    avgTotalWinner: [],
+  });
   const [dashboardSalesDataListDay, setDashboardSalesDataListDay] = useState<
     SalesData[] | null
   >(null);
@@ -73,9 +81,108 @@ const Dashboard = () => {
     }
   };
 
+  const fetchTotalVotesByCompany = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${dominioBase}/Vote/TotalVotesByCompany`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("tokenUser")}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      if (data?.state && data?.data?.length > 0) {
+        setShowSplash(false);
+        setRestOfData((prevState) => ({
+          ...prevState,
+          totalVotesByCompany: data?.data,
+        }));
+      } else {
+        throw new Error("Network response was not ok");
+      }
+    } catch (error) {
+      showSnackBar({
+        message: messages.genericError,
+        severity: "error",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchAvgByAnswer = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(
+        `${dominioBase}/Vote/TotalAVGVotesByCompany`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("tokenUser")}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      if (data?.state && data?.data?.length > 0) {
+        setShowSplash(false);
+        setRestOfData((prevState) => ({
+          ...prevState,
+          avgByAnswer: data?.data,
+        }));
+      } else {
+        throw new Error("Network response was not ok");
+      }
+    } catch (error) {
+      showSnackBar({
+        message: messages.genericError,
+        severity: "error",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchAvgTotalWinner = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${dominioBase}/Vote/TotalVotesAVG`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("tokenUser")}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      if (data?.state && data?.data?.length > 0) {
+        setShowSplash(false);
+        setRestOfData((prevState) => ({
+          ...prevState,
+          avgTotalWinner: data?.data,
+        }));
+      } else {
+        throw new Error("Network response was not ok");
+      }
+    } catch (error) {
+      showSnackBar({
+        message: messages.genericError,
+        severity: "error",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
+    fetchDashboardSalesData();
+    fetchTotalVotesByCompany();
+    fetchAvgByAnswer();
+    fetchAvgTotalWinner();
     const interval = setInterval(() => {
-      fetchDashboardSalesData();
       setShowSplash(false);
     }, 2000);
 
@@ -98,7 +205,12 @@ const Dashboard = () => {
     }
   }, [dashboardSalesData]);
 
-  const handleRefresh = () => fetchDashboardSalesData();
+  const handleRefresh = () => {
+    fetchDashboardSalesData();
+    fetchTotalVotesByCompany();
+    fetchAvgByAnswer();
+    fetchAvgTotalWinner();
+  };
 
   return (
     <ContainerDash>
@@ -118,8 +230,17 @@ const Dashboard = () => {
         </Grid>
       )}
       {user?.email === "admin@festival.com" && dashboardSalesData && (
-        <Grid container spacing={4}>
-          <Grid item xs={12} lg={6}>
+        <Grid container spacing={1}>
+          <Grid
+            item
+            xs={12}
+            lg={12}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <Button
               variant="outlined"
               text="Refrescar"
@@ -163,10 +284,42 @@ const Dashboard = () => {
           </Grid>
           <Grid item xs={12} lg={3}>
             <TotalCards
-              percentage={20}
+              percentage={Number(
+                (
+                  (sumTotalVotes(restOfData.totalVotesByCompany) /
+                    getTotalSales(dashboardSalesData)) *
+                  100
+                )?.toFixed(2)
+              )}
               type="sales"
-              text="Cantidad votantes"
-              total={2340}
+              text={`Cantidad votos - Meta: ${
+                getTotalSales(dashboardSalesData) / 2
+              }`}
+              total={sumTotalVotes(restOfData.totalVotesByCompany)}
+            />
+          </Grid>
+          <Grid item xs={12} lg={3}>
+            <TotalCards
+              percentage={0}
+              type="sales"
+              text="Compras - proximamente"
+              total={0}
+            />
+          </Grid>
+          <Grid item xs={12} lg={3}>
+            <TotalCards
+              percentage={0}
+              type="sales"
+              text="Jurados - proximamente"
+              total={0}
+            />
+          </Grid>
+          <Grid item xs={12} lg={3}>
+            <TotalCards
+              percentage={0}
+              type="sales"
+              text="Reportes - proximamente"
+              total={0}
             />
           </Grid>
           {dashboardSalesDataList && (
@@ -183,17 +336,21 @@ const Dashboard = () => {
                   text="Ventas participantes por día"
                 />
               </Grid>
+            </>
+          )}
+          {restOfData && (
+            <>
               <Grid item xs={12} lg={6}>
-                <CardsDetails
-                  dashboardSalesDataList={dashboardSalesDataListDay}
-                  text="DATOS FAKE"
+                <CardsVotes
+                  dashboardSalesDataList={mergeArraysByCompanyId(
+                    restOfData.totalVotesByCompany,
+                    restOfData.avgTotalWinner
+                  )}
+                  text="Votos"
                 />
               </Grid>
             </>
           )}
-          {/* <Grid item xs={12} lg={4}>
-            <CardsDetails text="Ventas por participante" />
-          </Grid> */}
         </Grid>
       )}
     </ContainerDash>
