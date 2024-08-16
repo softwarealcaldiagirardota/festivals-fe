@@ -9,6 +9,13 @@ import Title from "../../../components/Title/index.tsx";
 import { useNavigate } from "react-router-dom";
 import { messages, urlBase } from "../../../utils/utils.tsx";
 import { useAuth0 } from "@auth0/auth0-react";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 
 const arrayNumber = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const Sales = () => {
@@ -30,6 +37,7 @@ const Sales = () => {
       .toUpperCase()}${user?.nickname?.slice(1)}`;
     setTitle(`Ventas ${capital}`);
   }, [user]);
+  const [openDraweConfirm, setOpenDraweConfirm] = useState(false);
 
   const handleSubmit = async () => {
     if (!online) {
@@ -77,6 +85,7 @@ const Sales = () => {
       });
     } finally {
       setLoading(false);
+      handleClose();
     }
   };
 
@@ -87,35 +96,60 @@ const Sales = () => {
 
   const handleNavigate = () => navigate("/company-reports/sales/detail");
 
+  const handleClose = () => setOpenDraweConfirm((event) => !event);
   return (
-    <Container isMobile={isMobile}>
-      <BackArrow />
-      <Number value={value?.length > 0 ? value : 0} />
-      <StyledContainerSales>
-        {arrayNumber.map((number) => (
-          <NumberButton
-            noData={!companyData?.id}
-            key={number}
-            onClick={handleClick.bind(null, number)}
-            text={number}
+    <>
+      <Dialog
+        open={openDraweConfirm}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Confirme la venta"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            ¿Está seguro de enviar la venta?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleClose}
+            text="Cancelar"
+            canContinue={true}
+            variant="outlined"
           />
-        ))}
-        <StyledNumberButton onClick={handleDeleteValues}>
-          <Title text="Borrar" type="small" />
-        </StyledNumberButton>
-      </StyledContainerSales>
-      <Button
-        onClick={handleSubmit}
-        canContinue={loading ? false : parseInt(value) > 0}
-        text="Enviar"
-      />
-      <Button
-        variant="outlined"
-        text="Ver registros"
-        onClick={handleNavigate}
-        canContinue={companyData?.id > 0}
-      />
-    </Container>
+          <Button onClick={handleSubmit} text="Confirmar" canContinue={true} />
+        </DialogActions>
+      </Dialog>
+      <Container isMobile={isMobile}>
+        <BackArrow />
+        <Number value={value?.length > 0 ? value : 0} />
+        <StyledContainerSales>
+          {arrayNumber.map((number) => (
+            <NumberButton
+              noData={!companyData?.id}
+              key={number}
+              onClick={handleClick.bind(null, number)}
+              text={number}
+            />
+          ))}
+          <StyledNumberButton onClick={handleDeleteValues}>
+            <Title text="Borrar" type="small" />
+          </StyledNumberButton>
+        </StyledContainerSales>
+        <Button
+          onClick={handleClose}
+          canContinue={loading ? false : parseInt(value) > 0}
+          text="Enviar"
+        />
+        <Button
+          variant="outlined"
+          text="Ver registros"
+          onClick={handleNavigate}
+          canContinue={companyData?.id > 0}
+        />
+      </Container>
+    </>
   );
 };
 

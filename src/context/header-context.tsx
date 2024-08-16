@@ -8,7 +8,7 @@ import {
 } from "react";
 import { theme } from "../theme";
 import { pathnamePermission } from "../utils/utils";
-import { Item } from "../utils/type";
+import { Item, Results } from "../utils/type";
 
 interface ISnackBarState {
   open?: boolean;
@@ -35,6 +35,8 @@ interface HeaderContextType {
   setCompanyData: React.Dispatch<React.SetStateAction<Item>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setDataResults: React.Dispatch<React.SetStateAction<Results | undefined>>;
+  dataResults: Results | undefined;
 }
 
 const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
@@ -53,7 +55,7 @@ export const HeaderProvider = ({ children }: { children: ReactNode }) => {
   const showLoginButton = pathnamePermission.includes(window.location.pathname);
   const [companyData, setCompanyData] = useState<Item>({} as Item);
   const [loading, setLoading] = useState(false);
-
+  const [dataResults, setDataResults] = useState<Results>();
   useEffect(() => {
     window.addEventListener("online", function () {
       setOnline(navigator.onLine);
@@ -94,6 +96,8 @@ export const HeaderProvider = ({ children }: { children: ReactNode }) => {
         setCompanyData,
         loading,
         setLoading,
+        dataResults,
+        setDataResults,
       }}
     >
       {children}

@@ -6,7 +6,7 @@ import TotalCards from "./components/totals-card";
 import CardsDetails from "./components/cards-details";
 import { useAuth0 } from "@auth0/auth0-react";
 import Splash from "../../components/Splash";
-import { dominioBase, messages, urlBase } from "../../utils/utils";
+import { dominioBase, formatter, messages, urlBase } from "../../utils/utils";
 import {
   SalesData,
   getDailySales,
@@ -22,9 +22,10 @@ import {
 } from "./utils";
 import Button from "../../components/Button";
 import CardsVotes from "./components/cards-votes";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const { setTitle, showSnackBar } = useHeader();
+  const { setTitle, showSnackBar, setDataResults } = useHeader();
   const [showSplash, setShowSplash] = useState(true);
   const [dashboardSalesData, setDashboardSalesData] = useState(null);
   const [dashboardSalesDataList, setDashboardSalesDataList] = useState<
@@ -39,6 +40,7 @@ const Dashboard = () => {
     SalesData[] | null
   >(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const { user } = useAuth0();
   useEffect(() => {
@@ -212,6 +214,15 @@ const Dashboard = () => {
     fetchAvgTotalWinner();
   };
 
+  useEffect(() => {
+    if (dashboardSalesData) {
+      setDataResults({
+        cant: formatter.format(getTotalSales(dashboardSalesData)),
+        value: formatter.format(getTotalSalesInMoney(dashboardSalesData)),
+      });
+    }
+  }, [dashboardSalesData]);
+
   return (
     <ContainerDash>
       {showSplash && <Splash />}
@@ -234,7 +245,7 @@ const Dashboard = () => {
           <Grid
             item
             xs={12}
-            lg={12}
+            lg={6}
             sx={{
               display: "flex",
               justifyContent: "center",
@@ -243,8 +254,24 @@ const Dashboard = () => {
           >
             <Button
               variant="outlined"
-              text="Refrescar"
+              text="Refrescar dashboard"
               onClick={handleRefresh}
+              canContinue={!loading}
+            />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            lg={6}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              text="Ver resultados"
+              onClick={() => navigate("/results")}
               canContinue={!loading}
             />
           </Grid>

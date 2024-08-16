@@ -12,3 +12,8 @@ export type Participation = {
   cant: number;
   idProduct: number;
 };
+
+export type Results = {
+  cant: string;
+  value: string;
+};

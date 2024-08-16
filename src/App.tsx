@@ -19,6 +19,7 @@ import ScheduleList from "./pages/home/scheduled-list";
 import NotFound from "./pages/404";
 import Calm from "./pages/home/calm";
 import { palette } from "./theme";
+import Results from "./pages/results";
 
 const App = () => {
   const { snackBarState, handleSnackBarClose, setAuth0Token } = useHeader();
@@ -46,6 +47,14 @@ const App = () => {
             element={
               <PrivateRoute setAuth0Token={setAuth0Token}>
                 <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/results"
+            element={
+              <PrivateRoute setAuth0Token={setAuth0Token}>
+                <Results />
               </PrivateRoute>
             }
           />
