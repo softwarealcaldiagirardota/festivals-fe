@@ -298,15 +298,15 @@ const Dashboard = () => {
               total={sumTotalVotes(restOfData.totalVotesByCompany)}
             />
           </Grid>
-          <Grid item xs={12} lg={3}>
+          <Grid item xs={12} lg={3} style={{ opacity: 0.3 }}>
             <TotalCards
               percentage={0}
               type="sales"
-              text="Compras - proximamente"
+              text="Compras - próximamente"
               total={0}
             />
           </Grid>
-          <Grid item xs={12} lg={3}>
+          <Grid item xs={12} lg={3} style={{ opacity: 0.3 }}>
             <TotalCards
               percentage={0}
               type="sales"
@@ -314,7 +314,7 @@ const Dashboard = () => {
               total={0}
             />
           </Grid>
-          <Grid item xs={12} lg={3}>
+          <Grid item xs={12} lg={3} style={{ opacity: 0.3 }}>
             <TotalCards
               percentage={0}
               type="sales"
