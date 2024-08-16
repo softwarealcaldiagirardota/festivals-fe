@@ -137,7 +137,7 @@ const ClientVotes = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          code: code || codeInput,
+          code: code?.startsWith("/") ? code?.substring(1) : code || codeInput,
           "id-festival": "2",
           Authorization: `Bearer ${localStorage.getItem("tokenUser")}`,
         },
