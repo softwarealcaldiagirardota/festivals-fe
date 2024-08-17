@@ -40,7 +40,13 @@ const CardsVotes = ({
         </StyledContainerItem>
         {dashboardSalesDataList &&
           dashboardSalesDataList
-            .sort((a, b) => b.overall_average_rating - a.overall_average_rating)
+            .sort((a, b) => {
+              if (b.overall_average_rating !== a.overall_average_rating) {
+                return b.overall_average_rating - a.overall_average_rating;
+              } else {
+                return b.total_votes - a.total_votes;
+              }
+            })
             .map((item, index) => (
               <StyledContainerItem key={index + 1}>
                 <StyledContainerItemDos>

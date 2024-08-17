@@ -331,7 +331,7 @@ const Dashboard = () => {
               percentage={Number(
                 (
                   (sumTotalVotes(restOfData.totalVotesByCompany) /
-                    getTotalSales(dashboardSalesData)) *
+                    (getTotalSales(dashboardSalesData) / 2)) *
                   100
                 )?.toFixed(2)
               )}
