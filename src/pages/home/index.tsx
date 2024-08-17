@@ -13,7 +13,7 @@ const HomeImage = () => {
   const { isMobile } = useHeader();
   return (
     <StyledContainer>
-      <Link to="/calm">
+      <Link to="/client-votes">
         <StyledImage
           isMobile={isMobile}
           src={
