@@ -2,9 +2,11 @@ import "./results.css";
 import { useHeader } from "../../context/header-context";
 import { useEffect, useState } from "react";
 import fondoresultados from "../../assets/fondoresultados.jpg";
+import { formatter, urlBase } from "../../utils/utils";
+import { getTotalSales, getTotalSalesInMoney } from "../dashboard/utils";
 
 function Results() {
-  const { dataResults } = useHeader();
+  const { dataResults, setDataResults } = useHeader();
   const [showData, setShowData] = useState(false);
   const [countDown, setCountDown] = useState(10);
   const [confettis, setConfettis] = useState([]);
@@ -17,10 +19,40 @@ function Results() {
     );
     setConfettis(confettisArray);
   }, []);
+
+  const fetchDashboardSalesData = async () => {
+    try {
+      const response = await fetch(
+        `${urlBase}/CompanySale/companySalesTotalByDate`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("tokenUser")}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      if (data?.state && data?.data?.length > 0) {
+        setDataResults({
+          cant: formatter.format(getTotalSales(data?.data)),
+          value: formatter.format(getTotalSalesInMoney(data?.data)),
+        });
+      }
+    } catch (error) {
+      console.log("***Error en fetchDashboardSalesData: ", error);
+    }
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCountDown((prev) => prev - 1);
     }, 1000);
+
+    const intervalFetch = setInterval(() => {
+      fetchDashboardSalesData();
+    }, 5000);
 
     const timeout = setTimeout(() => {
       setShowData(true);
@@ -28,6 +60,7 @@ function Results() {
 
     return () => {
       clearInterval(interval);
+      clearInterval(intervalFetch);
       clearTimeout(timeout);
       setShowData(false);
       setCountDown(10);
