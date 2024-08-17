@@ -58,7 +58,7 @@ const CardsVotes = ({
                     />
                     <Title
                       isNumberDetail={true}
-                      text={item?.overall_average_rating?.toFixed(2)}
+                      text={item?.overall_average_rating?.toFixed(3)}
                     />
                   </StyledContainerItemValue>
                 </StyledContainerItemDos>

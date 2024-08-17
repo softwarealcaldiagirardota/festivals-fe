@@ -25,7 +25,7 @@ import CardsVotes from "./components/cards-votes";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const { setTitle, showSnackBar, setDataResults } = useHeader();
+  const { setTitle, showSnackBar, setDataResults, isMobile } = useHeader();
   const [showSplash, setShowSplash] = useState(true);
   const [dashboardSalesData, setDashboardSalesData] = useState(null);
   const [dashboardSalesDataList, setDashboardSalesDataList] = useState<
@@ -226,20 +226,43 @@ const Dashboard = () => {
   return (
     <ContainerDash>
       {showSplash && <Splash />}
-      {user?.email !== "admin@festival.com" && (
-        <Grid container spacing={4}>
-          <Grid item xs={12} lg={3}>
-            <Box
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              height="100%"
-            >
-              No tienes permiso para ver esta página
-            </Box>
+      {user?.email !== "admin@festival.com" &&
+        user?.email !== "resultados@festival.com" && (
+          <Grid container spacing={4}>
+            <Grid item xs={12} lg={3}>
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                height="100%"
+              >
+                No tienes permiso para ver esta página
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
-      )}
+        )}
+      {user?.email === "resultados@festival.com" &&
+        dashboardSalesData &&
+        !isMobile && (
+          <Grid container spacing={1}>
+            <Grid
+              item
+              xs={12}
+              lg={12}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Button
+                text="Ver resultados"
+                onClick={() => navigate("/results")}
+                canContinue={!loading}
+              />
+            </Grid>
+          </Grid>
+        )}
       {user?.email === "admin@festival.com" && dashboardSalesData && (
         <Grid container spacing={1}>
           <Grid

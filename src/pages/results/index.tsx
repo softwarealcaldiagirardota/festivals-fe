@@ -51,7 +51,7 @@ function Results() {
                 <span>{dataResults?.cant}</span>Recetas
               </li>
               <li>
-                <span>${dataResults?.value}</span>Platica
+                <span>${dataResults?.value}</span>Ingresos
               </li>
             </ul>
           </div>

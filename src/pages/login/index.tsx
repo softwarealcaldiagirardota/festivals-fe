@@ -8,9 +8,19 @@ const Login = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (isAuthenticated && !isLoading && user?.email === "admin@festival.com")
+    if (
+      isAuthenticated &&
+      !isLoading &&
+      (user?.email === "admin@festival.com" ||
+        user?.email === "resultados@festival.com")
+    )
       navigate("/dashboard");
-    if (isAuthenticated && !isLoading && user?.email !== "admin@festival.com")
+    if (
+      isAuthenticated &&
+      !isLoading &&
+      user?.email !== "admin@festival.com" &&
+      user?.email !== "resultados@festival.com"
+    )
       navigate("/company-reports");
   }, [isAuthenticated, isLoading, user]);
 

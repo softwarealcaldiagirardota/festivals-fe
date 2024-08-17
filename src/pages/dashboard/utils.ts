@@ -173,7 +173,7 @@ export function mergeArraysByCompanyId(votesArray: any, ratingsArray: any) {
     const rating = ratingsMap.get(companyId);
     const votePercentage: any =
       totalVotesSum > 0
-        ? ((vote.total_votes / totalVotesSum) * 100)?.toFixed(2)
+        ? ((vote.total_votes / totalVotesSum) * 100)?.toFixed(3)
         : 0;
     const mergedObject = {
       company_id: companyId,

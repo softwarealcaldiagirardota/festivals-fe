@@ -45,6 +45,8 @@ export const messages = {
   errorSavingSales: "Error guardando la venta. Por favor intente de nuevo",
   saveSuccess: "Registro guardado correctamente.",
   errorSavingBuys: "Error guardando la compra. Por favor intente de nuevo",
+  saleDeleted: "Venta eliminada",
+  saleDeletedError: "Error eliminando la venta. Por favor intente de nuevo.",
 };
 
 export const validateCodeStructure = (code: string): boolean => {
