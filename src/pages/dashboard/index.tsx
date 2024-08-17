@@ -70,8 +70,6 @@ const Dashboard = () => {
       if (data?.state && data?.data?.length > 0) {
         setShowSplash(false);
         setDashboardSalesData(data?.data);
-      } else {
-        throw new Error("Network response was not ok");
       }
     } catch (error) {
       showSnackBar({
@@ -101,8 +99,6 @@ const Dashboard = () => {
           ...prevState,
           totalVotesByCompany: data?.data,
         }));
-      } else {
-        throw new Error("Network response was not ok");
       }
     } catch (error) {
       showSnackBar({
@@ -135,8 +131,6 @@ const Dashboard = () => {
           ...prevState,
           avgByAnswer: data?.data,
         }));
-      } else {
-        throw new Error("Network response was not ok");
       }
     } catch (error) {
       showSnackBar({
@@ -166,8 +160,6 @@ const Dashboard = () => {
           ...prevState,
           avgTotalWinner: data?.data,
         }));
-      } else {
-        throw new Error("Network response was not ok");
       }
     } catch (error) {
       showSnackBar({
@@ -282,22 +274,24 @@ const Dashboard = () => {
               canContinue={!loading}
             />
           </Grid>
-          <Grid
-            item
-            xs={12}
-            lg={6}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Button
-              text="Ver resultados"
-              onClick={() => navigate("/results")}
-              canContinue={!loading}
-            />
-          </Grid>
+          {!isMobile && (
+            <Grid
+              item
+              xs={12}
+              lg={6}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Button
+                text="Ver resultados"
+                onClick={() => navigate("/results")}
+                canContinue={!loading}
+              />
+            </Grid>
+          )}
           <Grid item xs={12} lg={3}>
             <TotalCards
               percentage={getSalesPercentage(dashboardSalesData)}

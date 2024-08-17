@@ -27,12 +27,12 @@ const Header = () => {
           )}
           <Title type="small" text={title} />
           {isAuthenticated && (
-            <StatusLabel handleClick={() => logout()} value={"Logout"} />
+            <StatusLabel handleClick={() => logout()} value={"Cerrar sesión"} />
           )}
           {!isAuthenticated && showLoginButton && (
             <StatusLabel
               handleClick={() => loginWithRedirect()}
-              value={"Login"}
+              value={"Iniciar sesión"}
             />
           )}
           {title === "Verificar código" && !isAuthenticated && (
