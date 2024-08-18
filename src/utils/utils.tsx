@@ -161,8 +161,8 @@ export const orderArrayDesc = (array: Participation[]) =>
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 
-export const totalSales2023 = 42949;
-export const totalSales2023Money = 515388000;
+export const totalSales2023 = (42949 / 3) * 2;
+export const totalSales2023Money = (515388000 / 3) * 2;
 export const currentPrice = 15000;
 
 export const colorsDashboard = [
