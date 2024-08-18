@@ -147,7 +147,11 @@ export const sumCant = (array: Participation[]) => {
 
 export const sumCantDay = (array: Participation[]) => {
   const today = new Date().toISOString().split("T")[0];
-  return array
+  const filteredData = array.filter((item) => {
+    const date = new Date(item.createdAt);
+    return date.getUTCHours() >= 6;
+  });
+  return filteredData
     .filter((item) => item.createdAt.split("T")[0] === today)
     .reduce((total, item) => total + item.cant, 0);
 };
