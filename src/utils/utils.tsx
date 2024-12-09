@@ -132,7 +132,7 @@ export const domain = "dev-t7qrzenx1neaggbp.us.auth0.com"; //import.meta.env.VIT
 export const clientId = "NxzOyJPPDsH8EklQOCJot9IcGpD7Gnso"; //import.meta.env.VITE_AUTH0_CLIENT_ID;
 export const audience = "https://ferias.girardotabackoffice.com";
 
-export const dominioBase = "https://api.feriasgirardota.com";
+export const dominioBase = "https://festivals-app-a06d0db3394c.herokuapp.com";
 export const urlBase = "https://festivals-app-a06d0db3394c.herokuapp.com/api";
 
 export const convertDate = (dateString: string) => {
