@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useHeader } from "../../context/header-context";
 import Actions from "../../components/Actions";
-import logoAction1 from "../../assets/splash-2.png";
+import logoAction1 from "../../assets/splash-2.jpg";
 import { StyledContainerActions } from "./styles";
 import { useNavigate } from "react-router-dom";
 

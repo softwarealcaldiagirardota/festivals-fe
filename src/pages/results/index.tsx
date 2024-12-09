@@ -1,7 +1,7 @@
 import "./results.css";
 import { useHeader } from "../../context/header-context";
 import { useEffect, useState } from "react";
-import fondoresultados from "../../assets/fondoresultados.jpg";
+import fondoresultados from "../../assets/background-temp.jpg";
 import { formatter, urlBase } from "../../utils/utils";
 import { getTotalSales, getTotalSalesInMoney } from "../dashboard/utils";
 

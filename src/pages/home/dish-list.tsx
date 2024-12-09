@@ -1,5 +1,5 @@
-import listaPropuestaMobile from "../../assets/lista-propuesta-mobile.jpg";
-import listaPropuestaDesktop from "../../assets/lista-propuesta-desktop.jpg";
+import listaPropuestaMobile from "../../assets/background-temp.jpg";
+import listaPropuestaDesktop from "../../assets/background-temp.jpg";
 import { useHeader } from "../../context/header-context";
 import { StyledContainer, StyledGoBack, StyledImage } from "./styles";
 import { useNavigate } from "react-router-dom";

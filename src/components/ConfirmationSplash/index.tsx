@@ -1,6 +1,6 @@
 import { StyledLogo, StyledSplash } from "./styles";
-import logo from "../../assets/splash-1.png";
-import logoError from "../../assets/splash-2.png";
+import logo from "../../assets/splash-1.jpg";
+import logoError from "../../assets/splash-2.jpg";
 import Title from "../Title";
 import Button from "../Button";
 import { useHeader } from "../../context/header-context";

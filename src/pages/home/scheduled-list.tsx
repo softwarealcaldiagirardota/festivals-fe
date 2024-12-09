@@ -1,5 +1,5 @@
-import listaProgramacionMobile from "../../assets/lista-programacion-mobile.jpg";
-import listaProgramacionDesktop from "../../assets/lista-programacion-desktop.jpg";
+import listaProgramacionMobile from "../../assets/background-temp.jpg";
+import listaProgramacionDesktop from "../../assets/background-temp.jpg";
 import { useHeader } from "../../context/header-context";
 import { StyledContainer, StyledGoBack, StyledImage } from "./styles";
 import { useNavigate } from "react-router-dom";

@@ -1,5 +1,5 @@
-import calmaaMobile from "../../assets/calma-mobile.jpg";
-import calmaDesktop from "../../assets/calma-desktop.jpg";
+import calmaaMobile from "../../assets/background-temp.jpg";
+import calmaDesktop from "../../assets/background-temp.jpg";
 import { useHeader } from "../../context/header-context";
 import { StyledContainer, StyledGoBack, StyledImage } from "./styles";
 import { useNavigate } from "react-router-dom";
