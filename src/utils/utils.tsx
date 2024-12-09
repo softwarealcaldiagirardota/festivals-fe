@@ -133,7 +133,7 @@ export const clientId = "NxzOyJPPDsH8EklQOCJot9IcGpD7Gnso"; //import.meta.env.VI
 export const audience = "https://ferias.girardotabackoffice.com";
 
 export const dominioBase = "https://api.feriasgirardota.com";
-export const urlBase = "https://api.feriasgirardota.com/api";
+export const urlBase = "https://festivals-app-a06d0db3394c.herokuapp.com/api";
 
 export const convertDate = (dateString: string) => {
   const date = new Date(dateString);
